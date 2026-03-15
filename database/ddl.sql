@@ -1,0 +1,9 @@
+
+
+CREATE TABLE supplier
+(
+supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+phone CHAR(10) UNIQUE NOT NULL,
+email VARCHAR(255),
+address CHAR(255)
+);
