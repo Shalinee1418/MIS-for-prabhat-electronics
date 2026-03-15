@@ -13,21 +13,12 @@
 
         <body>
             <header>
-                <span class="logo">
-                    <img src="images/prabhat-electronics.jpg" alt="">
-                    <h2>Prabhat Electronics</h2>
-                    <span>
-                        <a href="app/pages/signin.php" class="button">Sign In</a>
-                        <a href="pages/signup.php" class="button">Sign Up</a>
-                    </span>
-                </span>
-                <nav>
-                    <a href="index.php">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Sales</a>
-                    <a href="service.php">Service</a>
-                    <a href="purchase.php">Purchase</a>
-                </nav>
+                <form  action="register.php" method="POST">
+    Username: <input type="text" name="username" required><br>
+    Email: <input type="email" name="email" required><br>
+    Password: <input type="password" name="password" required><br>
+    <button type="submit">Create User</button>
+</form>
             </header>
         </body>
 
