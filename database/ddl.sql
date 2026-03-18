@@ -18,9 +18,9 @@ CREATE TABLE purchase
     total_amount DECIMAL  AUTO_INCREMENT NOT NULL,
     date DATE NOT NULL,
     payment_status ENUM,
-    unit_price DECIMAL NOT NULL
-
+    unit_price DECIMAL NOT NULL,
 );
+
 CREATE TABLE purchase_items
 (
     purchase_item_id INT AUTO_INCREMENT PRIMARY KEY,
