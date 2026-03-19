@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <form action="../../auth/login.php" method="post" class="form-1">
         <div style="padding-top:200px">
             <h1 style="text-align: center;">Let's sign-in</h1>
         </div>
