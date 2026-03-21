@@ -12,13 +12,12 @@ CREATE TABLE purchase
 (
     purchase_id INT AUTO_INCREMENT PRIMARY KEY,
     supplier_id INT  UNIQUE NOT NULL,
-    purchase_number INT AUTO_INCREMENT UNIQUE NOT NULL,
     purchase_date DATE NOT NULL,
     tax_amount DECIMAL NOT NULL,
-    total_amount DECIMAL  AUTO_INCREMENT NOT NULL,
+    total_amount DECIMAL NOT NULL,
     date DATE NOT NULL,
-    payment_status ENUM,
-    unit_price DECIMAL NOT NULL,
+    payment_status ENUM('paid', 'due', 'part'),
+    unit_price DECIMAL NOT NULL
 );
 
 CREATE TABLE purchase_items
