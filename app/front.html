@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ElectroPro — Sales & Service Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #00d4ff;
+    --accent: #ff6b2b;
+    --dark: #080d14;
+    --dark2: #0d1520;
+    --dark3: #111c2a;
+    --text: #c8dae8;
+    --text-dim: #5a7a9a;
+    --border: rgba(0,212,255,0.15);
+    --glow: 0 0 20px rgba(0,212,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridScroll 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes gridScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  /* Glowing orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,107,43,0.1) 0%, transparent 70%);
+    bottom: 100px; right: -50px;
+    animation: pulse 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,13,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--primary), #0066ff);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: var(--glow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2));
+  }
+
+  .logo-text {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .logo-text span { color: var(--primary); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--primary); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Login Button */
+  .btn-login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 22px;
+    background: transparent;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+    color: var(--primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-login::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+
+  .btn-login:hover {
+    color: var(--dark);
+    box-shadow: var(--glow);
+  }
+  .btn-login:hover::before { transform: scaleX(1); }
+
+  .login-icon {
+    width: 16px; height: 16px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 40px 60px;
+  }
+
+  .hero-content {
+    max-width: 620px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 28px;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .highlight {
+    color: var(--primary);
+    text-shadow: 0 0 30px rgba(0,212,255,0.5);
+  }
+
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--primary), #0088ff);
+    border: none;
+    border-radius: 6px;
+    color: var(--dark);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 25px rgba(0,212,255,0.4);
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 35px rgba(0,212,255,0.6);
+  }
+
+  .btn-secondary {
+    padding: 14px 32px;
+    background: transparent;
+    border: 1px solid rgba(200,218,232,0.2);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* Hero visual panel */
+  .hero-visual {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(500px, 45vw);
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .dashboard-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .status-badge {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .status-live {
+    background: rgba(0,212,100,0.15);
+    color: #00d464;
+    border: 1px solid rgba(0,212,100,0.3);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .stat-box {
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .stat-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .stat-value.blue { color: var(--primary); }
+  .stat-value.orange { color: var(--accent); }
+  .stat-value.green { color: #00d464; }
+
+  .stat-change {
+    font-size: 11px;
+    color: #00d464;
+    margin-top: 4px;
+  }
+
+  .service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--dark3);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .service-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .service-name { flex: 1; color: var(--text); }
+  .service-status {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .s-pending { background: rgba(255,200,0,0.15); color: #ffcc00; }
+  .s-repair { background: rgba(0,212,255,0.15); color: var(--primary); }
+  .s-done { background: rgba(0,212,100,0.15); color: #00d464; }
+
+  /* Chart bar */
+  .mini-chart {
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 50px;
+  }
+
+  .bar {
+    flex: 1;
+    background: linear-gradient(to top, rgba(0,212,255,0.6), rgba(0,212,255,0.1));
+    border-radius: 3px 3px 0 0;
+    animation: barGrow 1s ease both;
+    transform-origin: bottom;
+  }
+
+  @keyframes barGrow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  /* FEATURES SECTION */
+  .features {
+    position: relative;
+    z-index: 1;
+    padding: 80px 40px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 60px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(0,212,255,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .icon-blue { background: rgba(0,212,255,0.15); }
+  .icon-orange { background: rgba(255,107,43,0.15); }
+  .icon-green { background: rgba(0,212,100,0.15); }
+  .icon-purple { background: rgba(150,100,255,0.15); }
+
+  .feature-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* Stats row */
+  .stats-row {
+    position: relative;
+    z-index: 1;
+    padding: 60px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--dark2);
+    flex-wrap: wrap;
+  }
+
+  .big-stat {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    padding: 20px 40px;
+    border-right: 1px solid var(--border);
+  }
+  .big-stat:last-child { border-right: none; }
+
+  .big-stat-number {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(0,212,255,0.4);
+  }
+
+  .big-stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--primary); text-decoration: none; }
+
+  /* Login Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--dark2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    width: min(440px, 90vw);
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { border-color: var(--primary); color: var(--primary); }
+
+  .modal-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .modal-logo .logo-icon { width: 36px; height: 36px; font-size: 18px; }
+  .modal-logo .logo-text { font-size: 18px; }
+
+  .modal-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .modal-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+  }
+
+  .form-input::placeholder { color: var(--text-dim); }
+
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 24px;
+    font-size: 13px;
+  }
+
+  .remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    cursor: pointer;
+  }
+
+  .remember input { accent-color: var(--primary); }
+
+  .forgot { color: var(--primary); text-decoration: none; font-size: 13px; }
+  .forgot:hover { text-decoration: underline; }
+
+  .btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary), #0088ff);
+    border: none;
+    border-radius: 8px;
+    color: var(--dark);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.5);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .role-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .role-btn {
+    padding: 10px 8px;
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-dim);
+    font-size: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .role-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(0,212,255,0.05);
+  }
+
+  @media (max-width: 900px) {
+    .hero-visual { display: none; }
+    .hero-content { max-width: 100%; }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    .features { padding: 60px 20px; }
+    .big-stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .big-stat:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">⚡</div>
+    <span class="logo-text">Electro<span>Pro</span></span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Inventory</a></li>
+    <li><a href="#">Sales</a></li>
+    <li><a href="#">Service</a></li>
+    <li><a href="#">Reports</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <a href="#" class="btn-login" onclick="openLogin(event)">
+      <svg class="login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+        <polyline points="10 17 15 12 10 7"/>
+        <line x1="15" y1="12" x2="3" y2="12"/>
+      </svg>
+      Login
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Electronic Management Platform
+    </div>
+
+    <h1>
+      Smart <span class="highlight">Sales</span> &<br>
+      <span class="accent">Service</span> Control<br>
+      For Electronics
+    </h1>
+
+    <p>
+      Streamline your electronics business with unified inventory management, real-time sales tracking, customer service workflows, and advanced analytics — all in one powerful platform.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#" class="btn-primary" onclick="openLogin(event)">Get Started</a>
+      <a href="#" class="btn-secondary">View Demo</a>
+    </div>
+  </div>
+
+  <!-- Dashboard Preview -->
+  <div class="hero-visual">
+    <div class="dashboard-card">
+      <div class="card-header">
+        <span class="card-title">Live Dashboard</span>
+        <span class="status-badge status-live">● LIVE</span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Today's Sales</div>
+          <div class="stat-value blue">₹2.4L</div>
+          <div class="stat-change">↑ 12.4% vs yesterday</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Active Jobs</div>
+          <div class="stat-value orange">48</div>
+          <div class="stat-change">↑ 3 new today</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Inventory</div>
+          <div class="stat-value green">1,284</div>
+          <div class="stat-change">8 low stock alerts</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Customers</div>
+          <div class="stat-value" style="color:#a78bfa">892</div>
+          <div class="stat-change">↑ 7 new this week</div>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-bottom:10px; margin-top:4px;">Recent Service Jobs</div>
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-dot" style="background:#ffcc00"></div>
+          <span class="service-name">Samsung TV — Screen Repair</span>
+          <span class="service-status s-pending">Pending</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot" style="background:var(--primary)"></div>
+          <span class="service-name">MacBook Pro — Motherboard</span>
+          <span class="service-status s-repair">In Repair</span>
+        </div>
+        <div class="service-item">
+          <div class="service-dot" style="background:#00d464"></div>
+          <span class="service-name">iPhone 14 — Battery Replace</span>
+          <span class="service-status s-done">Completed</span>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-top:16px; margin-bottom:8px;">Weekly Sales</div>
+      <div class="mini-chart">
+        <div class="bar" style="height:40%;animation-delay:0.1s"></div>
+        <div class="bar" style="height:65%;animation-delay:0.15s"></div>
+        <div class="bar" style="height:45%;animation-delay:0.2s"></div>
+        <div class="bar" style="height:80%;animation-delay:0.25s"></div>
+        <div class="bar" style="height:60%;animation-delay:0.3s"></div>
+        <div class="bar" style="height:90%;animation-delay:0.35s"></div>
+        <div class="bar" style="height:75%;animation-delay:0.4s"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="big-stat">
+    <div class="big-stat-number">5,000+</div>
+    <div class="big-stat-label">Products Tracked</div>
+  </div>
+  <div class="big-stat">
+    <div class="big-stat-number">98%</div>
+    <div class="big-stat-label">Uptime Guaranteed</div>
+  </div>
+  <div class="big-stat">
+    <div class="big-stat-number">3.2x</div>
+    <div class="big-stat-label">Revenue Growth</div>
+  </div>
+  <div class="big-stat">
+    <div class="big-stat-number">24/7</div>
+    <div class="big-stat-label">Support Access</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Core Modules</div>
+  <div class="section-title">Everything Your Business Needs</div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">🛒</div>
+      <div class="feature-title">Sales Management</div>
+      <div class="feature-desc">Track invoices, purchase orders, quotations, and customer transactions in real-time with automated billing.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-orange">🔧</div>
+      <div class="feature-title">Service Tickets</div>
+      <div class="feature-desc">Manage repair jobs, assign technicians, track job progress, and notify customers automatically on status updates.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-green">📦</div>
+      <div class="feature-title">Inventory Control</div>
+      <div class="feature-desc">Real-time stock levels, barcode scanning, low-stock alerts, supplier management, and multi-location support.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-purple">📊</div>
+      <div class="feature-title">Analytics & Reports</div>
+      <div class="feature-desc">Powerful dashboards with visual charts on revenue trends, technician performance, and product movement.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">👥</div>
+      <div class="feature-title">Customer CRM</div>
+      <div class="feature-desc">Maintain complete customer history, warranty records, communication logs, and loyalty program management.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-orange">🔐</div>
+      <div class="feature-title">Role-Based Access</div>
+      <div class="feature-desc">Admin, manager, technician, and cashier roles with granular permission controls and audit trails.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <a href="#">ElectroPro Systems</a> — Electronic Sales & Service Management Platform. All rights reserved.</p>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLogin()">✕</button>
+
+    <div class="modal-logo">
+      <div class="logo-icon">⚡</div>
+      <span class="logo-text">Electro<span>Pro</span></span>
+    </div>
+
+    <div class="modal-title">Welcome Back</div>
+    <div class="modal-sub">Sign in to your management console</div>
+
+    <div class="form-group">
+      <label class="form-label">Email / Username</label>
+      <input type="email" class="form-input" placeholder="admin@electropro.com">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-input" placeholder="••••••••••">
+    </div>
+
+    <div class="form-options">
+      <label class="remember">
+        <input type="checkbox"> Remember me
+      </label>
+      <a href="#" class="forgot">Forgot password?</a>
+    </div>
+
+    <button class="btn-submit">Sign In</button>
+
+    <div class="divider">Or sign in as</div>
+
+    <div class="role-buttons">
+      <button class="role-btn">👑 Admin</button>
+      <button class="role-btn">🔧 Technician</button>
+      <button class="role-btn">💼 Sales Rep</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openLogin(e) {
+    e.preventDefault();
+    document.getElementById('loginModal').classList.add('active');
+  }
+
+  function closeLogin() {
+    document.getElementById('loginModal').classList.remove('active');
+  }
+
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) closeLogin();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLogin();
+  });
+
+  // Stagger bar animations
+  document.querySelectorAll('.bar').forEach((bar, i) => {
+    bar.style.animationDelay = (i * 0.07) + 's';
+  });
+</script>
+
+</body>
+</html>
+
