@@ -16,7 +16,7 @@ $result = $connection->query($sql);
 if($result->num_rows > 0){
 session_start();
 $_SESSION['email'] = $email;
-header("location:../app/pages/dashboard.php");
+header("location:../include/pages/dashboard.php");
 }
 else
     echo "Authentication failed!";
