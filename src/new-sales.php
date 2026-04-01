@@ -15,7 +15,7 @@
     </header>
     <main>
         <section>
-            <h2> Purchase Form </h2>
+            <h2> Sale Form </h2>
             <form class="form-1">
                 <span>
                     <label for="Sales"> Sales No:</label>
