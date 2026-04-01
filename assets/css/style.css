@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header h2 {
+  padding: 10px;
+}
+ 
+
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  color: #f1f1f1;
+  padding: 10px;
+}
