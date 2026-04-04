@@ -20,4 +20,5 @@ switch ($request) {
         break;
     default:
         include $page_path . "error.php";
+
 }

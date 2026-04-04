@@ -3,15 +3,14 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header .logo {
-  display: flex;
-}
+
 header img {
   width: 64px;
 }
 
 header h2 {
   padding: 10px;
+  margin-left: auto;
 }
 
 nav {
