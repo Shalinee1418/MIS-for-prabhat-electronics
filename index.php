@@ -1,32 +1,24 @@
+<!-- Front Controller -->
+<?php
+require __DIR__ . "/vendor/autoload.php";
 
-<!DOCTYPE html>
-<html lang="en">
+use Sarma\MisForPrabhatElectronics\App\Controllers\AuthenticationController;
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
+$request = $_SERVER['REQUEST_URI'];
 
-<body>
-    <header>
+$page_path = $_SERVER['DOCUMENT_ROOT'] . "/pages/";
 
-        <body>
-            <header>
-                   <h2>Prabhat Electronics</h2>
-                    <span>
-                        <a href="../app/pages/signin.php" class="button">Sign In</a>
-                        <a href="../app/pages/signup.php" class="button">Sign Up</a>
-                    </span>
-                <nav>
-                    <a href="index.php">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Sales</a>
-                    <a href="service.php">Service</a>
-                    <a href="purchase.php">Purchase</a>
-                </nav>
-            </header>
-        </body>
+switch ($request) {
+    case "/":
+        include $page_path . "auth/login.php";
+        break;
+    case "/auth/authenticate":
+        AuthenticationController::authenticate();
+        break;
+    case "/user/admin-dashboard":
+        include $page_path . "user/admin-dashboard.php";
+        break;
+    default:
+        include $page_path . "error.php";
 
-</html>
+}

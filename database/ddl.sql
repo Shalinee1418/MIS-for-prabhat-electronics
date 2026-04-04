@@ -1,4 +1,8 @@
-
+CREATE TABLE user
+(
+user_id VARCHAR(50) PRIMARY KEY,
+password VARCHAR(100)
+);
 
 CREATE TABLE supplier
 (
