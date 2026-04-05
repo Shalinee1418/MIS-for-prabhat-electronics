@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
+    <header>
+         <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/header.php" ?>
+    </header>
+    <h3>Admin Dashboard</h3>
 </body>
 </html>
