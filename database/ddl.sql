@@ -32,25 +32,25 @@ CREATE TABLE purchase_items
     quantity INT AUTO_INCREMENT NOT NULL,
 );
 
-CREATE TABLE stock_items
-(
-    stock_item_id INT AUTO_INCREMENT PRIMARY KEY,
-    INSERT INTO stock_items (column1, column2, column3)
-    VALUES (value1, value2, value3);
-    category_id INT UNIQUE NOT NULL,
-    name VARCHAR (255), NOT NULL,
-    purchase_price DECIMAL NOT NULL,
-    item_code VARCHAR(255) NOT NULL,
-    brand VARCHAR(255) NOT NULL,
-);
-
 CREATE TABLE category
 (
 category_id INT AUTO_INCREMENT PRIMARY KEY,
 category_name VARCHAR(255) NOT NULL,
 hsn_code INT NOT NULL,
-descrption VARCHAR(255) NOT NULL,
+descrption VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE product
+(
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT UNIQUE NOT NULL,
+    name VARCHAR (255) NOT NULL,
+    purchase_price DECIMAL NOT NULL,
+    product_code VARCHAR(255) NOT NULL,
+    brand VARCHAR(255) NOT NULL,
+    FOREIGN KEY(category_id) REFERENCES category(category_id)
+);
+
 
 CREATE TABLE sale
 (
