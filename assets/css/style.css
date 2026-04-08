@@ -121,4 +121,12 @@
 
     .pending { background: orange; }
     .completed { background: green; }
-    .inprogress { background: blueviolet; }
+    .inprogress { background: blueviolet;
+     }
+     .a.button{
+      margin: 20px;
+      padding-bottom: 10px;
+      background-color: aqua;
+     }
+    
+

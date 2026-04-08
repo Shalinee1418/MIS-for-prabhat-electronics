@@ -14,18 +14,24 @@
     }
 
     body {
-      height: 100vh;
+      height: 100px;
+      margin-top: 100px;
+      padding-left: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(to right, #c0c5d1, #506fa1);
-    }
+      background: white;
 
+    }
+    
     .login-container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      width: 320px;
+      background: skyblue;
+      margin: 100px;
+      padding: 50px;
+      align-content: center;
+      border-radius: 20px;
+      width: 400px;
+      height: 400px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
@@ -53,6 +59,7 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       outline: none;
+      
     }
 
     .input-group input:focus {
@@ -65,7 +72,7 @@
       background: #1e293b;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
       margin-top: 10px;
@@ -92,16 +99,18 @@
 <body>
   <h1> Login - Prabhat Electronics !</h1>
   <form action="/auth/authenticate" method="post">
-    <div class="cards">
-      <div class="card"><span>
+    <div class="login-container">
           <input type="text" name="user_id" id="user_id" placeholder="User Id">
           <input type="password" name="password" id="password" placeholder="Password">
-        </span>
-        <button>Login</button>
-  </form>
+        <button type="submit">Login</button>
+    </div>
+    </form>
+</div>
+</form>
   <div class="footer-text">
     Forgot password? <a href="#">Reset</a>
   </div>
+</span>
   </div>
 
 

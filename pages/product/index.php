@@ -17,21 +17,18 @@ print_r($products);
 </head>
 
 <body>
-  <!-- Sidebar -->
   <aside class="sidebar">
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php" ?>
   </aside>
 
-  <!-- Main Content -->
+  
   <div class="main">
-
-    <!-- Header -->
     <div class="header">
       <h1>Products</h1>
       <span>Admin</span>
     </div>
 
-    <!-- Cards -->
+ 
     <div class="cards">
       <div class="card">
         <h3>Total Sales</h3>
@@ -52,7 +49,6 @@ print_r($products);
       </div>
     </div>
 
-    <!-- Table -->
     <div class="table-container">
       <h3>Recent Service Requests</h3>
       <br>
@@ -88,10 +84,15 @@ print_r($products);
             <td>No display</td>
             <td><span class="status completed">Completed</span></td>
           </tr>
+       
+    </div>
         </tbody>
       </table>
+      
     </div>
+      <a href="new-product.php" class="button">New product</a>
   </div>
+ 
 </body>
 
 </html>

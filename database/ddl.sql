@@ -60,7 +60,7 @@ discount DECIMAL NOT NULL,
 invoice_number INT NOT NULL,
 tax_amount DECIMAL NOT NULL,
 unit_price DECIMAL NOT NULL,
-total_amount DECIMAL NOT NULL,
+total_amount DECIMAL NOT NULL
 );
 
 CREATE TABLE sales_items
