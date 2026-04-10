@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <img src="prabhat_electronics.jpg" alt="description">
   <style>
     * {
       margin: 10;
@@ -14,46 +15,59 @@
     }
 
     body {
-      height: 100px;
+      height: 500px;
       margin-top: 100px;
-      padding-left: 50px;
+      padding-right: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: white;
+      background: whitesmoke;
 
     }
     
-    .login-container {
+   .login-container {
+      display: grid;
+      justify-content: center;
       background: skyblue;
-      margin: 100px;
-      padding: 50px;
+      margin: 300px;
+      padding: 10px;
       align-content: center;
       border-radius: 20px;
-      width: 400px;
-      height: 400px;
+      width: 500px;
+      height: 500px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
 
-    .login-container h2 {
+    /* .login-container h2 {
       margin-bottom: 20px;
       color: #1e293b;
-    }
+    } */
 
-    .input-group {
+    .input{
+      width: 80%;
       margin-bottom: 15px;
       text-align: left;
+      border: #1e293b;
+      max-width: 20px;
+      margin: 30px;
+      padding: 20px;
+      
+    }
+    .login-container h1{
+      text-decoration: underline;
+      margin-top: 0px;
+    
     }
 
-    .input-group label {
-      font-size: 14px;
-      margin-bottom: 25px;
+    /* .input-group {
+      font-size: 15px;
+      margin-bottom: 10px;
       display: block;
-      color: rgb(42, 128, 165);
-    }
+      color: rgb(52, 156, 201);
+    } */
 
-    .input-group input {
+    /* .input-group input {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -64,17 +78,17 @@
 
     .input-group input:focus {
       border-color: #1e293b;
-    }
+    } */
 
     .login-btn {
-      width: 100%;
-      padding: 10px;
+      width: 30px;
+      padding: 50px;
       background: #1e293b;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 30px;
       margin-top: 10px;
     }
 
@@ -83,8 +97,8 @@
     }
 
     .footer-text {
-      margin-top: 15px;
-      font-size: 13px;
+      margin-top: 20px;
+      font-size: 15px;
       color: #555;
     }
 
@@ -93,23 +107,35 @@
       text-decoration: none;
       font-weight: bold;
     }
+
   </style>
 </head>
-
+<div>
 <body>
-  <h1> Login - Prabhat Electronics !</h1>
+  
   <form action="/auth/authenticate" method="post">
     <div class="login-container">
+      <h1> Login - Prabhat Electronics !</h1>
+     
           <input type="text" name="user_id" id="user_id" placeholder="User Id">
-          <input type="password" name="password" id="password" placeholder="Password">
-        <button type="submit">Login</button>
+          <br>
+    
+            <input type="password" name="password" id="password" placeholder="Password">
+        <br>
+        
+            <button type="submit">Login</button>
+        <br>
+
+         <div class="footer-text">
+    Forgot password? <a href="#">Reset</a>
+  </div>
+
     </div>
     </form>
 </div>
+</div>
 </form>
-  <div class="footer-text">
-    Forgot password? <a href="#">Reset</a>
-  </div>
+ 
 </span>
   </div>
 

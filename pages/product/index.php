@@ -5,7 +5,6 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ProductController;
 $productController = new ProductController();
 $products = $productController->getAll();
 
-print_r($products);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,17 +20,17 @@ print_r($products);
     <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php" ?>
   </aside>
 
-  
+
   <div class="main">
     <div class="header">
-      <h1>Products</h1>
+      <h1>Stock-item</h1>
       <span>Admin</span>
     </div>
 
- 
+
     <div class="cards">
       <div class="card">
-        <h3>Total Sales</h3>
+        <h3>Total Stock</h3>
         <p></p>
       </div>
       <div class="card">
@@ -40,59 +39,47 @@ print_r($products);
         </p>
       </div>
       <div class="card">
-        <h3>Pending Repairs</h3>
+        <h3>Pending Stock</h3>
         <p></p>
       </div>
       <div class="card">
-        <h3>Completed Services</h3>
+        <h3><a href="/product/create" class="button">New product</a></h3>
         <p></p>
       </div>
     </div>
 
     <div class="table-container">
-      <h3>Recent Service Requests</h3>
+      <h3>Stock-item-list</h3>
       <br>
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Customer</th>
+            <th>Category</th>
             <th>Device</th>
-            <th>Issue</th>
+            <th>Brand</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>#101</td>
-            <td>Name</td>
-            <td>Television</td>
-            <td>Screen issue</td>
-            <td><span class="status pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td>#102</td>
-            <td>Anita Singh</td>
-            <td>Mobile</td>
-            <td>Battery replacement</td>
-            <td><span class="status inprogress">In Progress</span></td>
-          </tr>
-          <tr>
-            <td>#103</td>
-            <td>Vikas Sharma</td>
-            <td>TV</td>
-            <td>No display</td>
-            <td><span class="status completed">Completed</span></td>
-          </tr>
-       
+          <?php
+          foreach ($products as $product) {
+          ?>
+            <tr>
+              <td><?= $product[0] ?></td>
+              <td><?= $product[1] ?></td>
+              <td><?= $product[2] ?></td>
+              <td><?= $product[5] ?></td>
+              <td><span class="status pending">Pending</span></td>
+            </tr>
+          <?php } ?>
     </div>
-        </tbody>
-      </table>
-      
-    </div>
-      <a href="new-product.php" class="button">New product</a>
+    </tbody>
+    </table>
+
   </div>
- 
+  </div>
+
 </body>
 
 </html>

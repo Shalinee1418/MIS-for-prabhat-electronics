@@ -13,7 +13,14 @@ class ProductController
     }
     public function create()
     {
+        $name = $_POST['name'];
+        $brand = $_POST['brand'];
 
+        $sql = "INSERT INTO product(name, brand) VALUES('$name', '$brand')";
+
+        $this->connection->query($sql);
+
+        header('location:/product');
     }
 
     public function get()

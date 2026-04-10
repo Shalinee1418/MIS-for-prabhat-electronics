@@ -140,3 +140,11 @@ payment_status ENUM NOT NULL,
 );
 
 
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE table_name;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+SELECT CONCAT('TRUNCATE TABLE `', table_schema, '`.`', table_name, '`;') 
+FROM information_schema.TABLES 
+WHERE table_schema = 'db_name';

@@ -15,15 +15,9 @@
 
   <!-- Main Content -->
   <div class="main">
-
-    <!-- Header -->
     <div class="header">
       <h1>Dashboard</h1>
       <span>Admin</span>
-    </div>
-    <div> class="cards">
-      <h3> Purchase </h3>
-      <p></p>
     </div>
     <!-- Cards -->
     <div class="card">
@@ -43,8 +37,6 @@
       <h3>Completed Services</h3>
       <p></p>
     </div>
-  </div>
-
   <!-- Table -->
   <div class="table-container">
     <h3>Recent Service Requests</h3>
@@ -83,6 +75,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
   </div>
 </body>
