@@ -30,8 +30,8 @@ $products = $productController->getAll();
 
     <div class="cards">
       <div class="card">
-        <h3>Total Stock</h3>
-        <p></p>
+        <h3>Total Stock</h3>    
+        <p> 50</p>
       </div>
       <div class="card">
         <h3>Orders</h3>
