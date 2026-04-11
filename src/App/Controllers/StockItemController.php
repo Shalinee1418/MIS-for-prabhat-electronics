@@ -3,7 +3,7 @@ namespace Sarma\MisForPrabhatElectronics\App\Controllers;
 
 use Sarma\MisForPrabhatElectronics\App\Config\DbConfig;
 
-class ProductController
+class StockItemController
 {
     private $connection;
 

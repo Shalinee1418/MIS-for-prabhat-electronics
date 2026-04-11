@@ -1,9 +1,9 @@
 <?php
 
-use Sarma\MisForPrabhatElectronics\App\Controllers\ProductController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
 
-$productController = new ProductController();
-$products = $productController->getAll();
+$stockItemController = new StockItemController();
+$stock_items = $stockItemController->getAll();
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ $products = $productController->getAll();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products</title>
+  <title>stock_items</title>
 </head>
 
 <body>
@@ -43,7 +43,7 @@ $products = $productController->getAll();
         <p></p>
       </div>
       <div class="card">
-        <h3><a href="/product/create" class="button">New product</a></h3>
+        <h3><a href="/stock-item/create" class="button">New Stock Item</a></h3>
         <p></p>
       </div>
     </div>
@@ -63,13 +63,13 @@ $products = $productController->getAll();
         </thead>
         <tbody>
           <?php
-          foreach ($products as $product) {
+          foreach ($stock_items as $stock_item) {
           ?>
             <tr>
-              <td><?= $product[0] ?></td>
-              <td><?= $product[1] ?></td>
-              <td><?= $product[2] ?></td>
-              <td><?= $product[5] ?></td>
+              <td><?= $stock_item[0] ?></td>
+              <td><?= $stock_item[1] ?></td>
+              <td><?= $stock_item[2] ?></td>
+              <td><?= $stock_item[5] ?></td>
               <td><span class="status pending">Pending</span></td>
             </tr>
           <?php } ?>
