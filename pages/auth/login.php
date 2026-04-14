@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <img src="prabhat_electronics.jpg" alt="description">
+  <img src="/assets/images/Prabhat_electronics.png" alt="Official_Photo">
   <style>
     * {
       margin: 10;

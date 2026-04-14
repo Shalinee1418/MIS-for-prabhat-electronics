@@ -29,6 +29,23 @@ switch ($request) {
         $stockItemController = new StockItemController();
         $stockItemController->create();
         break;
+    case "/purchase":
+        include $page_path . "purchase/index.php";
+        break;
+    case "/purchase/create":
+        include $page_path . "purchase/create.php";
+        break;
+        case "/sales":
+        include $page_path . "sales/index.php";
+        break;
+    case "/sales/create":
+        include $page_path . "sales/create.php";
+        break;
+    case "/sales/save":
+        // $saleController = new saleController();
+        // $saleController->create();
+        break;
+
     default:
         include $page_path . "error.php";
 }
