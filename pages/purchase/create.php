@@ -19,13 +19,13 @@
 
         <!-- Header -->
         <div class="header">
-            <h1>New Product</h1>
+            <h1>New Purchase</h1>
             <span>Admin</span>
         </div>
 
         <!-- Table -->
         <div class="form-container">
-            <form action="/stock-item/save" method="post" class="form-type-1">
+            <form action="/product/save" method="post" class="form-type-1">
                 <span class="input-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name">

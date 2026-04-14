@@ -11,6 +11,11 @@ body {
 }
 
 /* Sidebar */
+.logo {
+  width: 200px;
+ margin-right: 70px;
+}
+
 .sidebar {
   width: 220px;
   height: 100vh;
