@@ -3,7 +3,7 @@ namespace Sarma\MisForPrabhatElectronics\App\Controllers;
 
 use Sarma\MisForPrabhatElectronics\App\Config\DbConfig;
 
-class ProductController
+class StockItemController
 {
     private $connection;
 
@@ -13,7 +13,14 @@ class ProductController
     }
     public function create()
     {
+        $name = $_POST['name'];
+        $brand = $_POST['brand'];
 
+        $sql = "INSERT INTO product(name, brand) VALUES('$name', '$brand')";
+
+        $this->connection->query($sql);
+
+        header('location:/product');
     }
 
     public function get()

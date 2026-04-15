@@ -3,7 +3,7 @@
 require __DIR__ . "/vendor/autoload.php";
 
 use Sarma\MisForPrabhatElectronics\App\Controllers\AuthenticationController;
-use Sarma\MisForPrabhatElectronics\App\Controllers\ProductController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
 
 $request = $_SERVER['REQUEST_URI'];
 
@@ -19,15 +19,15 @@ switch ($request) {
     case "/user/admin-dashboard":
         include $page_path . "user/admin-dashboard.php";
         break;
-    case "/product":
-        include $page_path . "product/index.php";
+    case "/stock-item":
+        include $page_path . "stock_item/index.php";
         break;
-    case "/product/create":
-        include $page_path . "product/create.php";
+    case "/stock-item/create":
+        include $page_path . "stock_item/create.php";
         break;
-    case "/product/save":
-        $productController = new ProductController();
-        $productController->create();
+    case "/stock-item/save":
+        $stockItemController = new StockItemController();
+        $stockItemController->create();
         break;
     default:
         include $page_path . "error.php";
