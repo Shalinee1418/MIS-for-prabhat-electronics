@@ -39,13 +39,13 @@ switch ($request) {
     case "/purchase/create":
         include $page_path . "purchase/create.php";
         break;
-    case "/sales":
+    case "/sale":
         include $page_path . "sales/index.php";
         break;
-    case "/sales/create":
+    case "/sale/create":
         include $page_path . "sales/create.php";
         break;
-    case "/sales/save":
+    case "/sale/save":
         // $saleController = new saleController();
         // $saleController->create();
         break;

@@ -5,8 +5,8 @@
     <a href="/stock-item">Stock Item</a>
     <a href="/purchase">Purchase</a>
     <a href="">Service Requests</a>
-    <a href="">Sales</a>
-    <a href="">Customers</a>
-    <a href="">Reports</a>
-    <a href="">Settings</a>
+    <a href="/sale">Sales</a>
+    <a href="/customer">Customers</a>
+    <a href="/reports">Reports</a>
+    <a href="/settings">Settings</a>
 </nav>

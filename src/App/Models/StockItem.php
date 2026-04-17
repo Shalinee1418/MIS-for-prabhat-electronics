@@ -34,7 +34,7 @@ class StockItem
     {
         $sql = "SELECT * FROM product";
         $result = $this->connection->query($sql);
-        return $result->fetch_all();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function get()

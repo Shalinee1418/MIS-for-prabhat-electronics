@@ -18,16 +18,22 @@
 
         <!-- Header -->
         <div class="header">
-            <h1>New</h1>
+            <h1>New Sale </h1>
             <span>Admin</span>
         </div>
 
         <!-- Table -->
         <div class="form-container">
-            <form action="" class="form-type-1">
-                <label for="">Label</label>
+            <form action="" class="form-type-1"> 
+            <label for="">Customer Name :</label>
                 <input type="text" name="" id="">
-                <button class="primary">Submit</button>
+                <label for="">Phone Number :</label>
+                <input type="text" name="" id="">
+                <label for="">Product :</label>
+                <input type="text" name="" id="">
+                <label for="">Quantity:</label>
+                <input type="text" name="" id="">
+                <button class="primary">Add Sale</button>
             </form>
         </div>
     </div>

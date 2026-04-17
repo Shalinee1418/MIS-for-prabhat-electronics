@@ -1,3 +1,10 @@
+<?php
+
+use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
+
+$saleController = new SaleController();
+$sales = $saleController->getAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +25,7 @@
 
       <!-- Header -->
       <div class="header">
-        <h1>Dashboard</h1>
+        <h1>Sales</h1>
         <span>Admin</span>
       </div>
 
@@ -34,18 +41,18 @@
           </p>
         </div>
         <div class="card">
-          <h3>Pending Repairs</h3>
+          <h3><a href="/sale/create" class="button">New Sale Item</a></h3>
           <p></p>
         </div>
         <div class="card">
-          <h3>Completed Services</h3>
+        <h3><a href="/sale/create" class="button">Edit Sale</a></h3>
           <p></p>
         </div>
       </div>
 
       <!-- Table -->
       <div class="table-container">
-        <h3>Recent Service Requests</h3>
+        <h3>Recent Sale Item</h3>
         <br>
         <table>
           <thead>
@@ -53,7 +60,6 @@
               <th>ID</th>
               <th>Customer</th>
               <th>Device</th>
-              <th>Issue</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -62,27 +68,37 @@
               <td>#101</td>
               <td>Name</td>
               <td>Television</td>
-              <td>Screen issue</td>
+             
               <td><span class="status pending">Pending</span></td>
             </tr>
             <tr>
               <td>#102</td>
               <td>Anita Singh</td>
               <td>Mobile</td>
-              <td>Battery replacement</td>
+            
               <td><span class="status inprogress">In Progress</span></td>
             </tr>
             <tr>
               <td>#103</td>
               <td>Vikas Sharma</td>
               <td>TV</td>
-              <td>No display</td>
+              
               <td><span class="status completed">Completed</span></td>
             </tr>
           </tbody>
+          <?php
+          foreach ($sales as $sale) {
+          ?>
+            <tr>
+              <td><?= $sale[0] ?></td>
+              <td><?= $sale[1] ?></td>
+              <td><?= $sale[2] ?></td>
+              <td><?= $sale[3] ?></td>
+            </tr>
+          <?php } ?>
         </table>
       </div>
     </div>
 </body>
 
-</html>
+</html> 
