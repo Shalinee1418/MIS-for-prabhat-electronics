@@ -1,3 +1,11 @@
+<?php
+
+use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
+
+$id = $_REQUEST['id'];
+$stockitemController = new StockItemController();
+$stock_item = $stockitemController->get($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,11 +36,11 @@
             <form action="/stock-item/save" method="post" class="form-type-1">
                 <span class="input-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" value="<?=  $stock_item['name'] ?>">
                 </span>
                 <span class="input-group">
                     <label for="brand">Brand</label>
-                    <input type="text" name="brand" id="brand">
+                    <input type="text" name="brand" id="brand" value="<?=  $stock_item['brand'] ?>">
                 </span>
                 <span class="input-group">
                     <label for="group">Group</label>

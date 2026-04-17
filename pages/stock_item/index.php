@@ -63,10 +63,11 @@ $stock_items = $stockItemController->getAll();
         <tbody>
           <?php
           foreach ($stock_items as $stock_item) {
+            $product_id = $stock_item['product_id'];
           ?>
             <tr>
-              <td><?= $stock_item['product_id'] ?></a> </td>
-              <td><a href="/edit"><?= $stock_item['name'] ?></a></td>
+              <td><?= $product_id ?></a> </td>
+              <td><a href="/stock-item/edit?id=<?= $product_id ?>"><?= $stock_item['name'] ?></a></td>
               <td><?= $stock_item['category_id'] ?></td>
               <td><?= $stock_item['brand'] ?></td>
               <td><span class="status pending">Pending</span></td>
