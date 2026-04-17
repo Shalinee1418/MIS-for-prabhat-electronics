@@ -21,4 +21,10 @@ class StockItemController
         $stockItem = new StockItem();
         return $stockItem->getAll();
     }
+
+    public function get(int $id)
+    {
+        $stockItem = new StockItem();
+        return $stockItem->get($id);
+    }
 }

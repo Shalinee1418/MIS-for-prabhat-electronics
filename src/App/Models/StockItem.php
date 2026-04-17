@@ -37,9 +37,11 @@ class StockItem
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function get()
+    public function get(int $id)
     {
-
+        $sql = "SELECT * FROM product WHERE product_id='$id'";
+        $result = $this->connection->query($sql);
+        return $result->fetch_assoc();
     }
 
     public function update()

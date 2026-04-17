@@ -9,7 +9,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
 $env = Dotenv::createImmutable(__DIR__);
 $env->load();
 
-$request = $_SERVER['REQUEST_URI'];
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $page_path = $_SERVER['DOCUMENT_ROOT'] . "/pages/";
 
@@ -32,6 +32,9 @@ switch ($request) {
     case "/stock-item/save":
         $stockItemController = new StockItemController();
         $stockItemController->create();
+        break;
+    case "/stock-item/edit":
+        include $page_path . "stock_item/edit.php";
         break;
     case "/purchase":
         include $page_path . "purchase/index.php";
