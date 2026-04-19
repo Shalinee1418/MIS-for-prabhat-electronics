@@ -60,30 +60,12 @@ $sales = $saleController->getAll();
               <th>ID</th>
               <th>Customer</th>
               <th>Device</th>
-              <th>Status</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>#101</td>
-              <td>Name</td>
-              <td>Television</td>
-             
-              <td><span class="status pending">Pending</span></td>
-            </tr>
-            <tr>
-              <td>#102</td>
-              <td>Anita Singh</td>
-              <td>Mobile</td>
-            
-              <td><span class="status inprogress">In Progress</span></td>
-            </tr>
-            <tr>
-              <td>#103</td>
-              <td>Vikas Sharma</td>
-              <td>TV</td>
               
-              <td><span class="status completed">Completed</span></td>
             </tr>
           </tbody>
           <?php

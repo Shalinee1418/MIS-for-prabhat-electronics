@@ -21,22 +21,77 @@
             <h1>New Sale </h1>
             <span>Admin</span>
         </div>
-
+     
         <!-- Table -->
         <div class="form-container">
-            <form action="" class="form-type-1"> 
-            <label for="">Customer Name :</label>
-                <input type="text" name="" id="">
-                <label for="">Phone Number :</label>
-                <input type="text" name="" id="">
-                <label for="">Product :</label>
-                <input type="text" name="" id="">
-                <label for="">Quantity:</label>
-                <input type="text" name="" id="">
-                <button class="primary">Add Sale</button>
-            </form>
-        </div>
-    </div>
-</body>
+    <p> Sale No: <input type="text"></p>
+    <div class="Id"></div>
+</div>
+<div class="customer">
+    <div class="left">
+        <p> Customer name : <input type="text"></p>
+</div>
+   <!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Invoice</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+        input {
+            width: 100%;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
 
+<table border="1" id="invoiceTable">
+    <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Rate</th>
+        <th>Per</th>
+        <th>Amount</th>
+    </tr>
+</table>
+
+<button onclick="addRow()">➕ Add Item</button>
+
+<script>
+let count = 1;
+
+function addRow() {
+    let table = document.getElementById("invoiceTable");
+
+    let row = table.insertRow();
+
+    row.innerHTML = ` 
+        <td><input type="text" name="item${count}"></td>
+        <td>
+            <label>Qty</label>
+            <input type="number" name="qty${count}">
+        </td>
+        <td>
+            <label>Rate</label>
+            <input type="number" name="rate${count}">
+        </td>
+        <td><input type="text" name="per${count}"></td>
+        <td><input type="number" name="amount${count}"></td>
+    `;
+
+    count++;
+}
+
+</script>
+
+</body>
 </html>
