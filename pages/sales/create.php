@@ -24,17 +24,18 @@
      
         <!-- Table -->
         <div class="form-container">
-    <p> Sale No: <input type="text"></p>
+     <p>
+  Sale No:
+  <input type="text" value="">
+</p>
     <div class="Id"></div>
 </div>
 <div class="customer">
     <div class="left">
         <p> Customer name : <input type="text"></p>
+        <Br>
+    </Br>
 </div>
-   <!DOCTYPE html>
-<html>
-<head>
-    <title>Dynamic Invoice</title>
     <style>
         table {
             width: 100%;
@@ -63,6 +64,7 @@
         <th>Amount</th>
     </tr>
 </table>
+ <button class="primary">Submit</button>
 
 <button onclick="addRow()">Add Item</button>
 
@@ -92,6 +94,7 @@ function addRow() {
 }
 
 </script>
+
 
 </body>
 </html>

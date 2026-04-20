@@ -73,7 +73,7 @@ serial_number INT NOT NULL,
 quantity INT NOT NULL,
 discount DECIMAL NOT NULL,
 unit_price DECIMAL NOT NULL,
-tax_amount DECIMAL NOT NULL,
+tax_amount DECIMAL NOT NULL
 );
 
 

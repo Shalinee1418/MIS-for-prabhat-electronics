@@ -52,3 +52,7 @@ class SaleController
     return $this->connection->query($sql);
 }
 }
+public function getlast()
+    {
+        
+    }
