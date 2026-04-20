@@ -64,7 +64,7 @@
     </tr>
 </table>
 
-<button onclick="addRow()">➕ Add Item</button>
+<button onclick="addRow()">Add Item</button>
 
 <script>
 let count = 1;
@@ -77,11 +77,11 @@ function addRow() {
     row.innerHTML = ` 
         <td><input type="text" name="item${count}"></td>
         <td>
-            <label>Qty</label>
+            <label></label>
             <input type="number" name="qty${count}">
         </td>
         <td>
-            <label>Rate</label>
+            <label></label>
             <input type="number" name="rate${count}">
         </td>
         <td><input type="text" name="per${count}"></td>

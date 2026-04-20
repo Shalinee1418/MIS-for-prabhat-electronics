@@ -15,59 +15,56 @@ $sales = $saleController->getAll();
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php" ?>
-    </aside>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php" ?>
+  </aside>
 
-    <!-- Main Content -->
-    <div class="main">
+  <!-- Main Content -->
+  <div class="main">
 
-      <!-- Header -->
-      <div class="header">
-        <h1>Sales</h1>
-        <span>Admin</span>
+    <!-- Header -->
+    <div class="header">
+      <h1>Sales</h1>
+      <span>Admin</span>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p></p>
       </div>
-
-      <!-- Cards -->
-      <div class="cards">
-        <div class="card">
-          <h3>Total Sales</h3>
-          <p></p>
-        </div>
-        <div class="card">
-          <h3>Orders</h3>
-          <p>
-          </p>
-        </div>
-        <div class="card">
-          <h3><a href="/sale/create" class="button">New Sale Item</a></h3>
-          <p></p>
-        </div>
-        <div class="card">
+      <div class="card">
+        <h3>Orders</h3>
+        <p>
+        </p>
+      </div>
+      <div class="card">
+        <h3><a href="/sale/create" class="button">New Sale Item</a></h3>
+        <p></p>
+      </div>
+      <div class="card">
         <h3><a href="/sale/create" class="button">Edit Sale</a></h3>
-          <p></p>
-        </div>
+        <p></p>
       </div>
+    </div>
 
-      <!-- Table -->
-      <div class="table-container">
-        <h3>Recent Sale Item</h3>
-        <br>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Customer</th>
-              <th>Device</th>
-              <th>Payment</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              
-            </tr>
-          </tbody>
+    <!-- Table -->
+    <div class="table-container">
+      <h3>Recent Sale Item</h3>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Device</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+
           <?php
           foreach ($sales as $sale) {
           ?>
@@ -78,9 +75,10 @@ $sales = $saleController->getAll();
               <td><?= $sale[3] ?></td>
             </tr>
           <?php } ?>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
+  </div>
 </body>
 
-</html> 
+</html>
