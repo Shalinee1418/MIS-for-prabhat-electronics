@@ -1,4 +1,5 @@
 <?php
+
 use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 
 $saleController = new SaleController();
@@ -30,65 +31,64 @@ use PHPUnit\TextUI\Configuration\Php;
             <h1>New Sale </h1>
             <span>Admin</span>
         </div>
-     
+
         <!-- Table -->
         <div class="form-container">
-     <p>
-<p>
-  Sale No:
-  <input type="text" value="<?php echo $sale['product_id'] + 1; ?>">
-</p>
- 
-</p>
-    <div class="Id"></div>
-</div>
-<div class="customer">
-    <div class="left">
-        <p> Customer name : <input type="text"></p>
-        <Br>
-    </Br>
-</div>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-        }
-        input {
-            width: 100%;
-        }
-        button {
-            margin-top: 10px;
-            padding: 8px 15px;
-        }
-    </style>
-</head>
-<body>
 
-<table border="1" id="invoiceTable">
-    <tr>
-        <th>Item</th>
-        <th>Quantity</th>
-        <th>Rate</th>
-        <th>Per</th>
-        <th>Amount</th>
-    </tr>
-</table>
- <button class="primary">Submit</button>
+            <div class="Id"></div>
+        </div>
+        <div class="customer">
+            <div class="left">
+                <p> Customer name : <input type="text"></p>
+                <Br>
+                </Br>
+            </div>
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
 
-<button onclick="addRow()">Add Item</button>
+                th,
+                td {
+                    padding: 10px;
+                }
 
-<script>
-let count = 1;
+                input {
+                    width: 100%;
+                }
 
-function addRow() {
-    let table = document.getElementById("invoiceTable");
+                button {
+                    margin-top: 10px;
+                    padding: 8px 15px;
+                }
+            </style>
+            </head>
 
-    let row = table.insertRow();
+            <body>
 
-    row.innerHTML = ` 
+                <table border="1" id="invoiceTable">
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Per</th>
+                        <th>Amount</th>
+                    </tr>
+                </table>
+                <button class="primary">Submit</button>
+
+                <button type="button" onclick="addRow()">Add Item</button>
+
+                <script>
+                    let count = 1;
+
+                    function addRow() {
+                        let table = document.getElementById("invoiceTable");
+
+                        let row = table.insertRow();
+
+                        row.innerHTML = ` 
         <td><input type="text" name="item${count}"></td>
         <td>
             <label></label>
@@ -102,11 +102,11 @@ function addRow() {
         <td><input type="number" name="amount${count}"></td>
     `;
 
-    count++;
-}
+                        count++;
+                    }
+                </script>
 
-</script>
 
+            </body>
 
-</body>
 </html>

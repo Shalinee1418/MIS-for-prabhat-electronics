@@ -10,11 +10,13 @@ class StockItemController
     public function create()
     {
         $stockItem = new StockItem();
-        $stockItem->name = $_POST['name'];      // convert to $request->name;
+        $stockItem->name = $_POST['name'];
         $stockItem->brand = $_POST['brand'];
         $stockItem->save();
         header('location:/stock-item');
     }
+
+    // TODO: convert to $request->name;
 
     public function getAll()
     {

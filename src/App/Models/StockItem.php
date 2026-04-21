@@ -44,13 +44,7 @@ class StockItem
         return $result->fetch_assoc();
     }
 
-    public function update()
-    {
+    public function update() {}
 
-    }
-
-    public function delete()
-    {
-
-    }
+    public function delete() {}
 }
