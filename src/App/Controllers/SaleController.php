@@ -51,8 +51,12 @@ class SaleController
     $sql = "DELETE FROM product WHERE id = '$id'";
     return $this->connection->query($sql);
 }
-}
+
 public function getlast()
     {
-        
+      $sql = "SELECT * FROM product ORDER BY product_id DESC LIMIT 1";
+    $result = $this->connection->query($sql);
+
+    return $result->fetch_assoc();
     }
+}

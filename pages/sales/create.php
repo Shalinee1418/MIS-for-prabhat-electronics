@@ -1,3 +1,12 @@
+<?php
+use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
+
+$saleController = new SaleController();
+$sale = $saleController->getlast();
+
+use PHPUnit\TextUI\Configuration\Php;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +34,11 @@
         <!-- Table -->
         <div class="form-container">
      <p>
+<p>
   Sale No:
-  <input type="text" value="">
+  <input type="text" value="<?php echo $sale['product_id'] + 1; ?>">
+</p>
+ 
 </p>
     <div class="Id"></div>
 </div>

@@ -73,10 +73,6 @@ $sales = $saleController->getAll();
               <td><?= $sale[1] ?></td>
               <td><?= $sale[2] ?></td>
               <td><?= $sale[3] ?></td>
-              <p>
-  Sale No:
-  <input type="text" value="<?php echo $sale[0] + 1; ?>">
-</p>
             </tr>
           <?php } ?>
         </tbody>
