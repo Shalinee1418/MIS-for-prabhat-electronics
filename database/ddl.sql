@@ -136,7 +136,7 @@ payment_date DATE NOT NULL,
 tax_amount DECIMAL NOT NULL,
 total_amount DECIMAL NOT NULL,
 payment_mode ENUM NOT NULL,
-payment_status ENUM NOT NULL,
+payment_status ENUM NOT NULL
 );
 
 

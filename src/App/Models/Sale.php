@@ -2,6 +2,7 @@
 
 class Sale
 {
+    private $id;
     private $name;
     private $brand;
 
@@ -37,7 +38,17 @@ class Sale
 
 
 
-    public function update() {}
+    public function update() {
+        $sql = "UPDATE sale SET name='$this->name', brand='$this->brand' WHERE id=$this->id";
+        $this->connection->query($sql);
+    }
 
-    public function delete() {}
+    public function delete() {
+        $sql = "DELETE FROM sale WHERE id=$this->id";
+        $this->connection->query($sql);
+    }
+    public function truncate() {
+        $sql = "TRUNCATE TABLE sale";
+        $this->connection->query($sql);
+    }
 }

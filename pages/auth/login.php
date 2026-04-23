@@ -39,12 +39,8 @@
       text-align: center;
     }
 
-    /* .login-container h2 {
-      margin-bottom: 20px;
-      color: #1e293b;
-    } */
 
-    .input{
+    /* .input{
       width: 80%;
       margin-bottom: 15px;
       text-align: left;
@@ -80,7 +76,7 @@
       border-color: #1e293b;
     } */
 
-    .login-btn {
+     /*.login-btn {
       width: 30px;
       padding: 50px;
       background: #1e293b;
@@ -106,7 +102,25 @@
       color: #1e293b;
       text-decoration: none;
       font-weight: bold;
-    }
+    } */
+      input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #2b7cff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1a5edb;
+}
 
   </style>
 </head>
