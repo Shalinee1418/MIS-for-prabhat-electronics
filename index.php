@@ -52,7 +52,9 @@ switch ($request) {
         // $saleController = new saleController();
         // $saleController->create();
         break;
-
+    case "/sale/edit":
+        include $page_path . "sales/edit.php";
+        break;
     default:
         include $page_path . "error.php";
 }

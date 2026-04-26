@@ -1,5 +1,9 @@
 <?php
 
+namespace Sarma\MisForPrabhatElectronics\App\Models;
+
+use Sarma\MisForPrabhatElectronics\App\Config\DbConfig;
+
 class Sale
 {
     private $id;
@@ -8,9 +12,9 @@ class Sale
 
     private $connection;
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->connection = $db;
+        $this->connection = DbConfig::getConnection();
     }
 
     public function createSale()
@@ -21,12 +25,26 @@ class Sale
 
     public function updateSaleNo($id, $sale_no)
     {
-        $this->connection->query("UPDATE sales SET sale_no='$sale_no' WHERE id=$id");
+        $this->connection->query("UPDATE sales SET sale_no='$sale_no' WHERE sale_id=$id");
     }
     public function save()
     {
         $sql = "INSERT INTO sale(id,brand) VALUES('$this->name','$this->brand')";
         $this->connection->query($sql);
+    }
+
+    public function get($id)
+    {
+        $sql = "SELECT * FROM sale WHERE sale_id='$id'";
+        $result = $this->connection->query($sql);
+        if ($row = $result->fetch_assoc()) {
+            $this->id = $row['id'];
+            $this->name = $row['name'];
+            $this->brand = $row['brand'];
+            return $this;
+        } else {
+            return null;
+        }
     }
 
     public function getAll()
@@ -38,16 +56,19 @@ class Sale
 
 
 
-    public function update() {
+    public function update()
+    {
         $sql = "UPDATE sale SET name='$this->name', brand='$this->brand' WHERE id=$this->id";
         $this->connection->query($sql);
     }
 
-    public function delete() {
+    public function delete()
+    {
         $sql = "DELETE FROM sale WHERE id=$this->id";
         $this->connection->query($sql);
     }
-    public function truncate() {
+    public function truncate()
+    {
         $sql = "TRUNCATE TABLE sale";
         $this->connection->query($sql);
     }

@@ -1,10 +1,10 @@
 <?php
 
-use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 
 $id = $_REQUEST['id'];
-$stockitemController = new StockItemController();
-$stock_item = $stockitemController->get($id);
+$saleController = new SaleController();
+$sale = $saleController->get($id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,27 +30,15 @@ $stock_item = $stockitemController->get($id);
             <h1>Edit sale </h1>
             <span>Admin</span>
         </div>
-
-        <!-- Table -->
         <div class="form-container">
-            <form action="/stock-item/save" method="post" class="form-type-1">
-                <span class="input-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="<?=  $sale_item['name'] ?>">
-                </span>
-                <span class="input-group">
-                    <label for="brand">Brand</label>
-                    <input type="text" name="brand" id="brand" value="<?=  $sale_item['brand'] ?>">
-                </span>
-                <span class="input-group">
-                    <label for="group">Category</label>
-                    <input type="text" name="group" id="group">
-                </span>
-                <span class="input-group">
-                    <label for="unit">Unit</label>
-                    <input type="text" name="unit" id="unit">
-                </span>
-                <button class="primary">Submit</button>
+            <form method="POST" action="/sales/edit">
+                <input type="hidden" name="id" value="<?php echo $sale ? $sale['id'] : ''; ?>" />
+                <input type="text" name="name" value="<?php echo $sale ? $sale['name'] : ''; ?>" />
+                <input type="number" name="price" value="<?php echo $sale ? $sale['price'] : ''; ?>" />
+                <input type="number" name="quantity" value="<?php echo $sale ? $sale['quantity'] : ''; ?>" />
+                <input type="number" name="total_price" value="<?php echo $sale ? $sale['total_price'] : ''; ?>" />
+                <input type="date" name="sale_date" value="<?php echo $sale ? $sale['sale_date'] : ''; ?>" />
+                <button type="submit">Update</button>
             </form>
         </div>
     </div>

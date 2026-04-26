@@ -5,6 +5,8 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
 $stockItemController = new StockItemController();
 $stock_items = $stockItemController->getAll();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,11 +68,12 @@ $stock_items = $stockItemController->getAll();
           foreach ($stock_items as $stock_item) {
           ?>
             <tr>
-              <td><?= $stock_item[0] ?></td>
-              <td><?= $stock_item[1] ?></td>
-              <td><?= $stock_item[2] ?></td>
-              <td><?= $stock_item[5] ?></td>
-              <td><span class="status pending">Pending</span></td>
+
+              <td><?= $stock_item['product_id'] ?></td>
+              <td><?= $stock_item['category_id'] ?></td>
+              <td><?= $stock_item['name'] ?></td>
+              <td><?= $stock_item['brand'] ?></td>
+
             </tr>
           <?php } ?>
     </div>

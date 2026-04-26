@@ -45,7 +45,7 @@ $sales = $saleController->getAll();
         <p></p>
       </div>
       <div class="card">
-        <h3><a href="/sale/create" class="button">Edit Sale</a></h3>
+        <h3><a href="/sale/edit" class="button">Edit Sale</a></h3>
         <p></p>
       </div>
     </div>
@@ -61,18 +61,21 @@ $sales = $saleController->getAll();
             <th>Customer</th>
             <th>Device</th>
             <th>Payment</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
 
           <?php
           foreach ($sales as $sale) {
+            $id = $sale[0];
           ?>
             <tr>
-              <td><?= $sale[0] ?></td>
+              <td><?= $id ?></td>
               <td><?= $sale[1] ?></td>
               <td><?= $sale[2] ?></td>
               <td><?= $sale[3] ?></td>
+              <td><a href="/sale/edit?id=<?= $id ?>">Edit</a></td>
             </tr>
           <?php } ?>
         </tbody>

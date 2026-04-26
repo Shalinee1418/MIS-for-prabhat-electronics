@@ -2,16 +2,12 @@
 
 namespace Sarma\MisForPrabhatElectronics\App\Controllers;
 
-use Sarma\MisForPrabhatElectronics\App\Config\DbConfig;
+use Sarma\MisForPrabhatElectronics\App\Models\Sale;
 
 class SaleController
 {
     private $connection;
 
-    public function __construct()
-    {
-        $this->connection = DbConfig::getConnection();
-    }
     public function create()
     {
         $name = $_POST['name'];
@@ -25,7 +21,10 @@ class SaleController
         header('location:/product');
     }
 
-    public function get() {}
+    public function get($id) {
+        $sale = new Sale();
+        return $sale->get($id);
+    }
 
     public function getAll()
     {
