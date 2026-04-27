@@ -5,8 +5,9 @@ use Illuminate\Http\Request;
 
 class Request
 {
+
     // public function __construct()
-    // {
+    //  {
 
 public function stockitem(Request $request)
 {
