@@ -151,7 +151,196 @@ WHERE table_schema = 'db_name';
 
 
 
+-- CREATE TABLE users (
+--     user_id INT AUTO_INCREMENT PRIMARY KEY,
+--     username VARCHAR(50) UNIQUE NOT NULL,
+--     password_hash VARCHAR(255) NOT NULL,
+--     role VARCHAR(30)
+-- );
 
+-- CREATE TABLE suppliers (
+--    supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+--    supplier_name VARCHAR(100) NOT NULL,
+--    phone VARCHAR(15) UNIQUE,
+--    email VARCHAR(120),
+--    address TEXT
+-- );
+
+-- CREATE TABLE categories (
+--    category_id INT AUTO_INCREMENT PRIMARY KEY,
+--    category_name VARCHAR(100) NOT NULL,
+--    hsn_code VARCHAR(30),
+--    description TEXT
+-- );
+
+-- CREATE TABLE products (
+--    product_id INT AUTO_INCREMENT PRIMARY KEY,
+--    category_id INT NOT NULL,
+--    product_name VARCHAR(150) NOT NULL,
+--    product_code VARCHAR(50) UNIQUE,
+--    brand VARCHAR(100),
+--    purchase_price DECIMAL(12,2),
+--    sale_price DECIMAL(12,2),
+
+--    FOREIGN KEY (category_id)
+--    REFERENCES categories(category_id)
+-- );
+-- CREATE TABLE stock (
+--    stock_id INT AUTO_INCREMENT PRIMARY KEY,
+--    product_id INT NOT NULL,
+--    serial_number VARCHAR(100),
+--    quantity INT DEFAULT 0,
+--    reorder_level INT,
+
+--    FOREIGN KEY(product_id)
+--    REFERENCES products(product_id)
+-- );
+
+-- CREATE TABLE purchases (
+--    purchase_id INT AUTO_INCREMENT PRIMARY KEY,
+--    supplier_id INT NOT NULL,
+--    purchase_date DATE,
+--    tax_amount DECIMAL(12,2),
+--    total_amount DECIMAL(12,2),
+--    payment_status VARCHAR(20),
+
+--    FOREIGN KEY (supplier_id)
+--    REFERENCES suppliers(supplier_id)
+-- );
+
+
+-- CREATE TABLE purchase_items (
+--    purchase_item_id INT AUTO_INCREMENT PRIMARY KEY,
+--    purchase_id INT NOT NULL,
+--    product_id INT NOT NULL,
+--    quantity INT NOT NULL,
+--    unit_price DECIMAL(12,2),
+--    tax_amount DECIMAL(12,2),
+
+--    FOREIGN KEY (purchase_id)
+--    REFERENCES purchases(purchase_id),
+
+--    FOREIGN KEY (product_id)
+--    REFERENCES products(product_id)
+-- );
+
+-- CREATE TABLE customers (
+--    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+--    customer_name VARCHAR(100),
+--    phone VARCHAR(15),
+--    email VARCHAR(120),
+--    gst_number VARCHAR(30),
+--    city VARCHAR(50),
+--    pincode VARCHAR(10)
+-- );
+
+-- CREATE TABLE sales (
+--    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+--    customer_id INT,
+--    sale_date DATE,
+--    invoice_number VARCHAR(50) UNIQUE,
+--    discount DECIMAL(12,2),
+--    tax_amount DECIMAL(12,2),
+--    total_amount DECIMAL(12,2),
+
+--    FOREIGN KEY(customer_id)
+--    REFERENCES customers(customer_id)
+-- );
+
+-- CREATE TABLE sale_items (
+--    sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
+--    sale_id INT NOT NULL,
+--    product_id INT NOT NULL,
+--    quantity INT,
+--    unit_price DECIMAL(12,2),
+--    discount DECIMAL(12,2),
+--    tax_amount DECIMAL(12,2),
+
+--    FOREIGN KEY(sale_id)
+--    REFERENCES sales(sale_id),
+
+--    FOREIGN KEY(product_id)
+--    REFERENCES products(product_id)
+-- );
+
+-- CREATE TABLE service_requests (
+--    service_request_id INT AUTO_INCREMENT PRIMARY KEY,
+--    customer_id INT,
+--    product_id INT,
+--    complaint TEXT,
+--    delivery_date DATE,
+--    warranty_status VARCHAR(30),
+
+--    FOREIGN KEY(customer_id)
+--    REFERENCES customers(customer_id),
+
+--    FOREIGN KEY(product_id)
+--    REFERENCES products(product_id)
+-- );
+
+-- CREATE TABLE service_parts_used (
+--    part_used_id INT AUTO_INCREMENT PRIMARY KEY,
+--    service_request_id INT,
+--    product_id INT,
+--    quantity INT,
+--    unit_price DECIMAL(12,2),
+--    charge_to_customer DECIMAL(12,2),
+
+--    FOREIGN KEY(service_request_id)
+--    REFERENCES service_requests(service_request_id),
+
+--    FOREIGN KEY(product_id)
+--    REFERENCES products(product_id)
+-- );
+
+
+-- CREATE TABLE payments (
+--    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+
+--    sale_id INT NULL,
+--    purchase_id INT NULL,
+--    service_request_id INT NULL,
+
+--    payment_date DATE,
+--    amount DECIMAL(12,2),
+--    payment_mode VARCHAR(30),
+--    status VARCHAR(20),
+
+--    FOREIGN KEY(sale_id)
+--    REFERENCES sales(sale_id),
+
+--    FOREIGN KEY(purchase_id)
+--    REFERENCES purchases(purchase_id),
+
+--    FOREIGN KEY(service_request_id)
+--    REFERENCES service_requests(service_request_id)
+-- );
+
+-- CREATE TABLE ledger_accounts (
+--    ledger_id INT AUTO_INCREMENT PRIMARY KEY,
+--    account_name VARCHAR(100),
+--    account_type VARCHAR(30),
+--    opening_balance DECIMAL(12,2)
+-- );
+-- CREATE TABLE journal_entries (
+--    journal_id INT AUTO_INCREMENT PRIMARY KEY,
+--    transaction_date DATE,
+--    narration TEXT
+-- );
+
+-- CREATE TABLE journal_lines (
+--    line_id INT AUTO_INCREMENT PRIMARY KEY,
+--    journal_id INT,
+--    ledger_id INT,
+--    debit DECIMAL(12,2) DEFAULT 0,
+--    credit DECIMAL(12,2) DEFAULT 0,
+
+--    FOREIGN KEY(journal_id)
+--    REFERENCES journal_entries(journal_id),
+
+--    FOREIGN KEY(ledger_id)
+--    REFERENCES ledger_accounts(ledger_id)
+-- );
 
 
 

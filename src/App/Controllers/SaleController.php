@@ -28,9 +28,8 @@ class SaleController
 
     public function getAll()
     {
-        $sql = "SELECT * FROM product";
-        $result = $this->connection->query($sql);
-        return $result->fetch_all();
+        $sale = new Sale();
+        return $sale->getAll();
     }
 
     public function update($id, $name, $price)
