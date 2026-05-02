@@ -47,4 +47,11 @@ class StockItem
     public function update() {}
 
     public function delete() {}
+
+    public function getProductName()
+    {
+        $sql = "SELECT name FROM product";
+        $result = $this->connection->query($sql);
+        return $result->fetch_all();
+    }
 }

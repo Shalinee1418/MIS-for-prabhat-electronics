@@ -150,6 +150,34 @@ FROM information_schema.TABLES
 WHERE table_schema = 'db_name';
 
 
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10,2),
+    gst_rate DECIMAL(5,2) 
+);
+
+CREATE TABLE invoices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_no VARCHAR(50),
+    total DECIMAL(10,2),
+    gst_total DECIMAL(10,2),
+    grand_total DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE invoice_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10,2),
+    gst_rate DECIMAL(5,2),
+    gst_amount DECIMAL(10,2),
+    total DECIMAL(10,2)
+);
+
+
 
 -- CREATE TABLE users (
 --     user_id INT AUTO_INCREMENT PRIMARY KEY,

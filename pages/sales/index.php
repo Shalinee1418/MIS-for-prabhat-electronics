@@ -65,24 +65,17 @@ $sales = $saleController->getAll();
           </tr>
         </thead>
         <tbody>
-
-           <?php
-                foreach ($sales as $sale) {
-                  $id = $sale['id'];
-                ?>
-           
-
-               <?php foreach ($sales as $sale): ?>
-         <tr>
-    <td><?= $sale['id'] ?? '' ?></td>
-    <td><?= $sale['customer'] ?? '' ?></td>
-    <td><?= $sale['device'] ?? '' ?></td>
-    <td><?= $sale['payment'] ?? '' ?></td>
-  </tr>
-<?php endforeach; ?>
-              <td><a href="/sale/edit?id=<?= $id ?>">Edit</a></td>
+          <?php foreach ($sales as $sale): ?>
+            <tr>
+              <td><?= $sale['id'] ?? '' ?></td>
+              <td><?= $sale['customer'] ?? '' ?></td>
+              <td><?= $sale['device'] ?? '' ?></td>
+              <td><?= $sale['payment'] ?? '' ?></td>
             </tr>
-          <?php } ?>
+          <?php endforeach; ?>
+          <td><a href="/sale/edit?id=<?= $sale['id'] ?? '' ?>">Edit</a></td>
+          </tr>
+          <?php  ?>
         </tbody>
       </table>
     </div>

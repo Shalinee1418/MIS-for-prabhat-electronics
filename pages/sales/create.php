@@ -1,13 +1,10 @@
 <?php
 
-use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
+use Sarma\MisForPrabhatElectronics\App\Models\StockItem;
 
-$saleController = new SaleController();
-$sale = $saleController->getlast();
-
-use PHPUnit\TextUI\Configuration\Php;
+$stockItem = new StockItem();
+$productNames = $stockItem->getProductName();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,6 +72,19 @@ use PHPUnit\TextUI\Configuration\Php;
                         <th>Per</th>
                         <th>Amount</th>
                     </tr>
+                    <tr>
+                        <td><input type="text" name="item" id="item" list="product_names">
+                            <datalist id="product_names">
+                                <?php foreach ($productNames as $productName) { ?>
+                                    <option value="<?= $productName[0] ?>"></option>
+                                <?php } ?>
+                            </datalist>
+                        </td>
+                        <td><input type="text" name="" id=""></td>
+                        <td><input type="text" name="" id=""></td>
+                        <td><input type="text" name="" id=""></td>
+                        <td><input type="text" name="" id=""></td>
+                    </tr>
                 </table>
                 <button class="primary">Submit</button>
 
@@ -89,7 +99,7 @@ use PHPUnit\TextUI\Configuration\Php;
                         let row = table.insertRow();
 
                         row.innerHTML = ` 
-        <td><input type="text" name="item${count}"></td>
+        <td><input type="text" name="item${count}" list="product_names"></td>
         <td>
             <label></label>
             <input type="number" name="qty${count}">
