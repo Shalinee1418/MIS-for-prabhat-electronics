@@ -11,7 +11,7 @@ $productNames = $stockItem->getProductName();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>New Sale</title>
 </head>
 
 <body>
@@ -30,75 +30,76 @@ $productNames = $stockItem->getProductName();
         </div>
 
         <!-- Table -->
-        <div class="form-container">
+        <form action="/sale/store" method="post">
+            <div class="form-container">
 
-            <div class="Id"></div>
-        </div>
-        <div class="customer">
-            <div class="left">
-                <p> Customer name : <input type="text"></p>
-                <Br>
-                </Br>
+                <div class="Id"></div>
             </div>
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
+            <div class="customer">
+                <div class="left">
+                    <p> Customer name : <input type="text"></p>
+                    <Br>
+                    </Br>
+                </div>
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
 
-                th,
-                td {
-                    padding: 10px;
-                }
+                    th,
+                    td {
+                        padding: 10px;
+                    }
 
-                input {
-                    width: 100%;
-                }
+                    input {
+                        width: 100%;
+                    }
 
-                button {
-                    margin-top: 10px;
-                    padding: 8px 15px;
-                }
-            </style>
-            </head>
+                    button {
+                        margin-top: 10px;
+                        padding: 8px 15px;
+                    }
+                </style>
+                </head>
 
-            <body>
+                <body>
 
-                <table border="1" id="invoiceTable">
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th>Rate</th>
-                        <th>Per</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="item" id="item" list="product_names">
-                            <datalist id="product_names">
-                                <?php foreach ($productNames as $productName) { ?>
-                                    <option value="<?= $productName[0] ?>"></option>
-                                <?php } ?>
-                            </datalist>
-                        </td>
-                        <td><input type="text" name="" id=""></td>
-                        <td><input type="text" name="" id=""></td>
-                        <td><input type="text" name="" id=""></td>
-                        <td><input type="text" name="" id=""></td>
-                    </tr>
-                </table>
-                <button class="primary">Submit</button>
+                    <table border="1" id="invoiceTable">
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Per</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="item" id="item" list="product_names">
+                                <datalist id="product_names">
+                                    <?php foreach ($productNames as $productName) { ?>
+                                        <option value="<?= $productName[0] ?>"></option>
+                                    <?php } ?>
+                                </datalist>
+                            </td>
+                            <td><input type="text" name="" id=""></td>
+                            <td><input type="text" name="" id=""></td>
+                            <td><input type="text" name="" id=""></td>
+                            <td><input type="text" name="" id=""></td>
+                        </tr>
+                    </table>
+                    <button class="primary">Submit</button>
 
-                <button type="button" onclick="addRow()">Add Item</button>
+                    <button type="button" onclick="addRow()">Add Item</button>
+        </form>
+        <script>
+            let count = 1;
 
-                <script>
-                    let count = 1;
+            function addRow() {
+                let table = document.getElementById("invoiceTable");
 
-                    function addRow() {
-                        let table = document.getElementById("invoiceTable");
+                let row = table.insertRow();
 
-                        let row = table.insertRow();
-
-                        row.innerHTML = ` 
+                row.innerHTML = ` 
         <td><input type="text" name="item${count}" list="product_names"></td>
         <td>
             <label></label>
@@ -112,11 +113,11 @@ $productNames = $stockItem->getProductName();
         <td><input type="number" name="amount${count}"></td>
     `;
 
-                        count++;
-                    }
-                </script>
+                count++;
+            }
+        </script>
 
 
-            </body>
+</body>
 
 </html>

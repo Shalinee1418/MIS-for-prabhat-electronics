@@ -3,7 +3,7 @@
 use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 
 $saleController = new SaleController();
-$sales = $saleController->getAll();
+// $sales = $saleController->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">

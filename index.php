@@ -4,7 +4,9 @@ require __DIR__ . "/vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use Sarma\MisForPrabhatElectronics\App\Controllers\AuthenticationController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
+use Sarma\MisForPrabhatElectronics\App\Core\Request;
 
 $env = Dotenv::createImmutable(__DIR__);
 $env->load();
@@ -48,9 +50,9 @@ switch ($request) {
     case "/sale/create":
         include $page_path . "sales/create.php";
         break;
-    case "/sale/save":
-        // $saleController = new saleController();
-        // $saleController->create();
+    case "/sale/store":
+        $saleController = new SaleController();
+        $saleController->store(new Request());
         break;
     case "/sale/edit":
         include $page_path . "sales/edit.php";
