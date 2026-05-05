@@ -11,15 +11,12 @@ class SaleController
     {
         $sale = new Sale();
         $sale->saleDate = $request->saleDate;
-        // $sale->invoiceNumber = $_POST['invoice_number'];
+        $sale->saleid = $request->saleid;
         $sale->save();
     }
-    public function update($id)
+    public function update()
     {
-        $sale = new Sale();
-        $sale->id = $id;
-        $sale->saleDate = $_POST['sale_date'];
-        $sale->update();
+       
     }
     public function delete($id)
     {

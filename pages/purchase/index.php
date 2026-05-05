@@ -47,7 +47,7 @@ $stock_items = $stockItemController->getAll();
     </div>
 
     <div class="table-container">
-      <h3>Stock-item-list</h3>
+      <h3>Purchases</h3>
       <br>
       <table>
         <thead>
