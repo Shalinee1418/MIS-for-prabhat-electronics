@@ -4,6 +4,7 @@ require __DIR__ . "/vendor/autoload.php";
 
 use Dotenv\Dotenv;
 use Sarma\MisForPrabhatElectronics\App\Controllers\AuthenticationController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\PurchaseController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
 use Sarma\MisForPrabhatElectronics\App\Core\Request;
@@ -44,6 +45,11 @@ switch ($request) {
     case "/purchase/create":
         include $page_path . "purchase/create.php";
         break;
+        case "/purchase/store":
+        $purchaseController = new PurchaseController();
+        $purchaseController->create(new Request());
+        break;
+
     case "/sale":
         include $page_path . "sales/index.php";
         break;

@@ -1,11 +1,10 @@
 <?php
 
-use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
-
-$stockItemController = new StockItemController();
-$stock_items = $stockItemController->getAll();
+use Sarma\MisForPrabhatElectronics\App\Controllers\PurchaseController;
 
 
+$purchaseController = new PurchaseController();
+$purchase = $purchaseController->getAll();
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +36,7 @@ $stock_items = $stockItemController->getAll();
         </p>
       </div>
       <div class="card">
-        <h3>Pending Stock</h3>
+        <h3>Pending Purchase</h3>
         <p></p>
       </div>
       <div class="card">
@@ -48,7 +47,6 @@ $stock_items = $stockItemController->getAll();
 
     <div class="table-container">
       <h3>Purchases</h3>
-      <br>
       <table>
         <thead>
           <tr>
@@ -56,19 +54,18 @@ $stock_items = $stockItemController->getAll();
             <th>Category</th>
             <th>Device</th>
             <th>Brand</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <?php
-          foreach ($stock_items as $stock_item) {
+          foreach ($purchase as $purchase) {
           ?>
             <tr>
 
-              <td><?= $stock_item['product_id'] ?></td>
-              <td><?= $stock_item['category_id'] ?></td>
-              <td><?= $stock_item['name'] ?></td>
-              <td><?= $stock_item['brand'] ?></td>
+              <td><?= $purchase['product_id'] ?></td>
+              <td><?= $purchase['category_id'] ?></td>
+              <td><?= $purchase['name'] ?></td>
+              <td><?= $purchase['brand'] ?></td>
 
             </tr>
           <?php } ?>

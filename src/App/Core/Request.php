@@ -8,7 +8,7 @@ class Request
 
     public function __construct()
     {
-        $this->data = $_POST;
+        $this->data = $_POST; // initializze post
     }
 
     public function input(string $key, $default = null)
