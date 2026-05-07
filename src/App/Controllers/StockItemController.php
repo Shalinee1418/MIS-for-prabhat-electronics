@@ -7,7 +7,8 @@ use Sarma\MisForPrabhatElectronics\App\Models\StockItem;
 
 class StockItemController
 {
-    public function create()
+    public function 
+    ()
     {
         $stockItem = new StockItem();
         $stockItem->name = $_POST['name'];

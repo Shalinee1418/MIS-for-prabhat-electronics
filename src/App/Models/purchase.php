@@ -6,9 +6,9 @@ use Sarma\MisForPrabhatElectronics\App\Config\DbConfig;
 
 class Purchase
 {
-    public $purchase_id;
-    public $supplier_id;    
-    public $purchase_date;
+    public $purchaseId;
+    public $supplierId;    
+    public $purchaseDate;
 
 
 
@@ -30,23 +30,23 @@ class Purchase
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function create()
-    {
-        $query = "INSERT INTO purchase (purchase_id, supplier_id, purchase_date) VALUES (?, ?, ?)";
+   public function create()
+{
+    $query = "INSERT INTO purchase (supplier_id, purchase_date) VALUES (?, CURDATE())";
 
-        $stmt = $this->connection->prepare($query);
+    $stmt = $this->connection->prepare($query);
 
-        $stmt->bind_param("iii", $this->purchase_id, $this->supplier_id, $this->purchase_date);
+    $stmt->bind_param("i", $this->supplierId);
 
-        return $stmt->execute();
-    }
+    return $stmt->execute();
+}
     public function delete()
     {
         $query = "DELETE FROM purchase WHERE id = ?";
 
         $stmt = $this->connection->prepare($query);
 
-        $stmt->bind_param("i", $this->id);
+        $stmt->bind_param("i", $this->purchaseId);
 
         return $stmt->execute();
     }

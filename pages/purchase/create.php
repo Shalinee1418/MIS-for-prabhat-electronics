@@ -1,3 +1,10 @@
+<?php
+
+use Sarma\MisForPrabhatElectronics\App\Models\Supplier;
+
+$suppliers = Supplier::all();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,18 +52,22 @@
         </div>
 
         <!-- Table -->
-         <input type="number" name="supplier_id">
+        <input type="number" name="supplier_id">
         <form action="/purchase/store" method="post">
             <div class="form-container">
                 <div class="customer">
                     <div class="left">
                         <span>
-                            <p>Supplier name : <input type="text" name="supplierName" id="supplier-name"> </p>
+                            Supplier name : <input type="hidden"> <select name="supplierId" id="supplier-id">
+                                <?php foreach ($suppliers as $supplier) { ?>
+                                    <option value="<?= $supplier['supplier_id'] ?>"><?= $supplier['email'] ?></option>
+                                <?php } ?>
+                            </select>
                         </span>
                         <span>
                             <div class="date-row">
                                 <?php $current_date = date('d-m-Y'); ?>
-                                <input type="text" value="<?= $current_date ?>" readonly style="text-align: right; padding: 5px">
+                                <input type="text" name="purchaseDate" id="purchase_date" value="<?= $current_date ?>" readonly style="text-align: right; padding: 5px">
                         </span>
                     </div>
 
@@ -70,12 +81,13 @@
                             <th>Item</th>
                             <th>Quantity</th>
                             <th>Rate</th>
+                            <th> per </th>
                             <th>Amount</th>
                         </tr>
                         <tr>
                             <td><input type="text" name="item" id="item" list="product_names">
                                 <datalist id="product_names">
-                                    <?php foreach ($purchase as $purchase) { ?>
+                                    <?php foreach ($purchases as $purchase) { ?>
                                         <option value="<?= $purchase[0] ?>"></option>
                                     <?php } ?>
                                 </datalist>

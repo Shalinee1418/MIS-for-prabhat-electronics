@@ -1,6 +1,8 @@
 <?php
+include 'src/App/Models/Supplier.php';
 
-$string = "<h1>Hello</h1>";
-$clean_string = filter_var($string, FILTER_SANITIZE_STRING);
+use Sarma\MisForPrabhatElectronics\App\Models\Supplier;
 
-echo $clean_string;
+$suppliers = Supplier::all();
+
+print_r($suppliers);

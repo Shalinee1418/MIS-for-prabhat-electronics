@@ -9,6 +9,8 @@ class Request
     public function __construct()
     {
         $this->data = $_POST; // initializze post
+        // $this->data = array_merge($_GET, $_POST);
+    
     }
 
     public function input(string $key, $default = null)
@@ -19,6 +21,7 @@ class Request
     public function __get(string $key)
     {
         return $_POST[$key] ?? null;
+        
     }
 
 }
