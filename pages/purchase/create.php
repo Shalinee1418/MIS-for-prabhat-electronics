@@ -45,6 +45,7 @@
         </div>
 
         <!-- Table -->
+         <input type="number" name="supplier_id">
         <form action="/purchase/store" method="post">
             <div class="form-container">
                 <div class="customer">
@@ -74,8 +75,8 @@
                         <tr>
                             <td><input type="text" name="item" id="item" list="product_names">
                                 <datalist id="product_names">
-                                    <?php foreach ($purchaseName as $purchaseName) { ?>
-                                        <option value="<?= $purchaseName[0] ?>"></option>
+                                    <?php foreach ($purchase as $purchase) { ?>
+                                        <option value="<?= $purchase[0] ?>"></option>
                                     <?php } ?>
                                 </datalist>
                             </td>

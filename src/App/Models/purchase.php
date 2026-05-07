@@ -32,11 +32,11 @@ class Purchase
 
     public function create()
     {
-        $query = "INSERT INTO purchase (product_name, quantity, price) VALUES (?, ?, ?)";
+        $query = "INSERT INTO purchase (purchase_id, supplier_id, purchase_date) VALUES (?, ?, ?)";
 
         $stmt = $this->connection->prepare($query);
 
-        $stmt->bind_param("sii", $this->product_name, $this->quantity, $this->price);
+        $stmt->bind_param("iii", $this->purchase_id, $this->supplier_id, $this->purchase_date);
 
         return $stmt->execute();
     }

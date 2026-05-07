@@ -59,6 +59,7 @@ $purchase = $purchaseController->getAll();
         <tbody>
           <?php
           foreach ($purchase as $purchase) {
+            
           ?>
             <tr>
 

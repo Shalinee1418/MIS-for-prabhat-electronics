@@ -10,7 +10,6 @@ class PurchaseController
     public function create(Request $request)
     {
         $purchase = new Purchase();
-        $purchase-> purchase_id = $request->id;
         $purchase->supplier_id = $request->supplier_id;
         $purchase->purchase_date = $request->purchase_date;
 

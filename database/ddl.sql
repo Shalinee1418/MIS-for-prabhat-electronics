@@ -24,12 +24,19 @@ CREATE TABLE purchase
     unit_price DECIMAL NOT NULL
 );
 
-CREATE TABLE purchase_items
-(
+CREATE TABLE purchase_items (
     purchase_item_id INT AUTO_INCREMENT PRIMARY KEY,
-    purchase_id INT AUTO_INCREMENT UNIQUE NOT NULL,
-    stock_item_id INT AUTO_INCREMENT UNIQUE NOT NULL,
-    quantity INT AUTO_INCREMENT NOT NULL,
+
+    purchase_id INT NOT NULL,
+    product_id INT NOT NULL,
+
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY (purchase_id)
+        REFERENCES purchase(purchase_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE category
