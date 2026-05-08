@@ -11,6 +11,10 @@ class PurchaseController
     {
         $purchase = new Purchase();
         $purchase->supplierId = $request->supplierId;
+        $purchase->supplierName = $request->supplierName;
+        $purchase->purchaseDate = $request->purchaseDate;
+        $purchase->paymentStatus = $request->paymentStatus;
+        $purchase->totalAmount = $request->totalAmount;
 
         return $purchase->create();
         

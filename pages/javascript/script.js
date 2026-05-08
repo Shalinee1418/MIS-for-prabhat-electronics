@@ -1,15 +1,15 @@
-async function getUsers() {
-  try {
-    const response = await fetch("http://localhost:8000/users");
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
+function calculate() {
+    let quantity = document.getElementById("quantity").value;
+    let rate = document.getElementById("rate").value;
+    let gst = document.getElementById("gst").value;
 
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Fetch error:", error);
-  }
+    let amount = qty * rate;
+    let cgst = (amount * (gst / 2)) / 100;
+    let sgst = (amount * (gst / 2)) / 100;
+    let total = amount + cgst + sgst;
+
+    document.getElementById("result").innerHTML =
+        "Total: ₹" + total;
 }
-getUsers();
+
