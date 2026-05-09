@@ -39,7 +39,7 @@ class Purchase
 
         $stmt->bind_param("id", $this->supplierId, $this->totalAmount);
 
-        return $stmt->execute();
+     return $stmt->execute();
     }
     public function delete()
     {

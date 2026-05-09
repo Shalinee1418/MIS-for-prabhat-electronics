@@ -5,14 +5,14 @@ use Sarma\MisForPrabhatElectronics\App\Models\Product;
 
 $suppliers = Supplier::all();
 //  $products  = Product::all();
-// print_r($product)
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Purchase</tit~le>
+    <title>New Purchase</title>
     <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <style>
         .header-row {
@@ -123,7 +123,7 @@ $suppliers = Supplier::all();
                 <div class="totals-box">
                     <div>CGST:  ₹<span id="totalCgst">0.00</span></div>
                     <div>SGST:  ₹<span id="totalSgst">0.00</span></div>
-                    <div><strong>Grand Total: ₹<input type="text" name="totalAmount" id="totalAmount">0.00</span></strong></div>
+                    <div><strong>Grand Total: ₹<input type="text" name="totalAmount" id="totalAmount" readonly>0.00</span></strong></div>
                 </div>
 
                 <!-- Buttons -->
