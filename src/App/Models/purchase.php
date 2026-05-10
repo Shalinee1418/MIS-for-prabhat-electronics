@@ -39,8 +39,15 @@ class Purchase
 
         $stmt->bind_param("id", $this->supplierId, $this->totalAmount);
 
-     return $stmt->execute();
+        return $stmt->execute();
     }
+    public function save()
+    {
+        $sql = "INSERT INTO purchase (purchaseId,supplierId,supplierName,purchaseDate,paymentStatus,totalAmount) VALUES('$this->purchaseId','$this->supplierId,$this->supplierName,$this->purchaseDate,$this->paymentStatus,$this->totalAmount')";
+        $this->connection->query($sql);
+        return $this->connection->insert_id;
+    }
+
     public function delete()
     {
         $query = "DELETE FROM purchase WHERE id = ?";
@@ -61,7 +68,7 @@ class Purchase
 
         return $stmt->execute();
     }
-    
+
     public function getById($id)
     {
         $query = "SELECT * FROM purchase WHERE id = ?";

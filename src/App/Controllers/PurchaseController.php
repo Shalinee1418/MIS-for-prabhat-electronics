@@ -4,6 +4,7 @@ namespace Sarma\MisForPrabhatElectronics\App\Controllers;
 
 use Sarma\MisForPrabhatElectronics\App\Core\Request;
 use Sarma\MisForPrabhatElectronics\App\Models\Purchase;
+use Sarma\MisForPrabhatElectronics\App\Models\PurchaseItems;
 
 class PurchaseController
 {
@@ -15,9 +16,18 @@ class PurchaseController
         $purchase->purchaseDate = $request->purchaseDate;
         $purchase->paymentStatus = $request->paymentStatus;
         $purchase->totalAmount = $request->totalAmount;
-
-        return $purchase->create();
+        $purchase->paymentStatus = 'due';
+        $purchaseId = $purchase->create();
         
+        $purchaseItems = new PurchaseItems();
+        $purchaseItems->purchaseId = $purchaseId;
+        $purchaseItems->productId = $request->productId;
+        $purchaseItems->quantity = $request->quantity;
+        $purchaseItems->price = $request->price;
+        $purchaseItems->subTotal = $request->subTotal;
+        $purchaseItems->save();
+
+        // header('location:/purchase');
     }
 
     public function delete()

@@ -63,10 +63,11 @@ $purchase = $purchaseController->getAll();
           ?>
             <tr>
 
-              <td><?= $purchase['product_id'] ?></td>
-              <td><?= $purchase['category_id'] ?></td>
-              <td><?= $purchase['name'] ?></td>
-              <td><?= $purchase['brand'] ?></td>
+              <td><?= $purchase['purchase_id'] ?></td>
+              <td><?= $purchase['supplier_id'] ?></td>
+              <td><?= $purchase['purchase_date'] ?></td>
+              <td><?= $purchase['total_amount'] ?></td>
+              <td><?= $purchase['payment_status'] ?></td>
 
             </tr>
           <?php } ?>
