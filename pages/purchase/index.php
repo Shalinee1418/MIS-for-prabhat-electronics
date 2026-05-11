@@ -54,6 +54,7 @@ $purchase = $purchaseController->getAll();
             <th>Category</th>
             <th>Device</th>
             <th>Brand</th>
+            <th>Total Amount</th>
           </tr>
         </thead>
         <tbody>
