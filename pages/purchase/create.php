@@ -118,11 +118,45 @@ $products = $stockItem->getAll();
                                     <?php endforeach; ?>
                                 </select>
                             </td>
-                            <td><input type="number" name="quantity" id="qty0" oninput="calculateRow(0)"></td>
-                            <td><input type="number" name="price" id="rate0" oninput="calculateRow(0)"></td>
-                            <td><input type="text" name="per" id="per0"></td>
-                            <td><input type="number" name="gst" id="gst0" oninput="calculateRow(0)"></td>
-                            <td><input type="number" name="subTotal" id="amount0" readonly></td>
+                            <td>
+                           <select name="quantity" oninput="calculateRow(0)">
+                            <?php foreach ($products as $product): ?>
+                                <option value="<?= $product['quantity'] ?>"><?= $product['quantity'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
+                    <td>
+                    <select name="price" oninput="calculateRow(0)">
+                            <?php foreach ($products as $product): ?>
+                                <option value="<?= $product['price'] ?>"><?= $product['price'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                            </td>
+                            <td>
+                            <select name="per" oninput="calculateRow(0)">
+                               <?php foreach ($products as $product): ?>
+                                 <option value="<?= $product['per'] ?>"><?=  $product['per'] ?></option>
+                                 <?php endforeach; ?>
+                                 
+                            </select>
+                            </td>
+                            <td><select type="number" name="gst" id="gst0" oninput="calculateRow(0)"></td>
+                            <td>
+                            <select name="amount" oninput="calculateRow(0)">
+                                <?php foreach ($products as $product): ?>
+                                    <option value="<?= $product['amount'] ?>"><?= $product['amount'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <datalist id="product_names">
+
+            </datalist>
+
+                    <td><input type="number" name="subTotal" id="amount0" readonly></td>
                         </tr>
                     </tbody>
                 </table>
@@ -149,7 +183,7 @@ $products = $stockItem->getAll();
         </form>
     </div>
 
-    <script>
+    <script> 
         let count = 1;
 
         function addRow() {
