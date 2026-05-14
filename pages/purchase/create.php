@@ -66,7 +66,6 @@ $products = $stockItem->getAll();
 </head>
 
 <body>
-
     <!-- Sidebar -->
     <aside class="sidebar">
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php"; ?>
@@ -112,59 +111,33 @@ $products = $stockItem->getAll();
 
                         <tr>
                             <td>
-                                <select name="productId" oninput="calculateRow(0)">
+                                <select name="productId[]" id="product_id0" oninput="calculateRow(0)">
                                     <?php foreach ($products as $product): ?>
                                         <option value="<?= $product['product_id'] ?>"><?= $product['name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td>
-                           <select name="quantity" oninput="calculateRow(0)">
-                            <?php foreach ($products as $product): ?>
-                                <option value="<?= $product['quantity'] ?>"><?= $product['quantity'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </td>
-                    <td>
-                    <select name="price" oninput="calculateRow(0)">
-                            <?php foreach ($products as $product): ?>
-                                <option value="<?= $product['price'] ?>"><?= $product['price'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                                <input type="text" name="quantity[]" id="quantity0" oninput="calculateRow(0)">
                             </td>
                             <td>
-                            <select name="per" oninput="calculateRow(0)">
-                               <?php foreach ($products as $product): ?>
-                                 <option value="<?= $product['per'] ?>"><?=  $product['per'] ?></option>
-                                 <?php endforeach; ?>
-                                 
-                            </select>
+                                <input type="text" name="price[]" id="rate0" oninput="calculateRow(0)">
                             </td>
-                            <td><select type="number" name="gst" id="gst0" oninput="calculateRow(0)"></td>
                             <td>
-                            <select name="amount" oninput="calculateRow(0)">
-                                <?php foreach ($products as $product): ?>
-                                    <option value="<?= $product['amount'] ?>"><?= $product['amount'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <datalist id="product_names">
-
-            </datalist>
-
-                    <td><input type="number" name="subTotal" id="amount0" readonly></td>
+                                <!-- <select name="per" oninput="calculateRow(0)">
+                                    <?php foreach ($products as $product): ?>
+                                        <option value="<?= $product['per'] ?>"><?= $product['per'] ?></option>
+                                    <?php endforeach; ?>
+ 
+                                </select> -->
+                            </td>
+                            <td><input type="number" name="gst[]" id="gst0" oninput="calculateRow(0)" value="18"></td>
+                            <td>
+                                <input type="text" name="subTotal[]" id="amount0" oninput="calculateRow(0)">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
-
-                <datalist id="product_names">
-
-                </datalist>
 
                 <!-- Totals -->
                 <div class="totals-box">
@@ -183,7 +156,7 @@ $products = $stockItem->getAll();
         </form>
     </div>
 
-    <script> 
+    <script>
         let count = 1;
 
         function addRow() {
@@ -191,24 +164,19 @@ $products = $stockItem->getAll();
             const row = tbody.insertRow();
 
             row.innerHTML = `
-                <td><input type="text"   name="item${count}"   list="product_names"
-                           oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="qty${count}"    id="qty${count}"
-                           oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="rate${count}"   id="rate${count}"
-                           oninput="calculateRow(${count})"></td>
-                <td><input type="text"   name="per${count}"    id="per${count}"></td>
-                <td><input type="number" name="gst${count}"    id="gst${count}"
-                           oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="amount${count}" id="amount${count}" readonly></td>
+                <td><input type="text"   name="productId[]"   list="product_names" oninput="calculateRow(${count})"></td>
+                <td><input type="number" name="quantity[]"    id="quantity${count}" oninput="calculateRow(${count})"></td>
+                <td><input type="number" name="price[]"   id="rate${count}" oninput="calculateRow(${count})"></td>
+                <td><input type="text"   name="per[]"    id="per${count}"></td>
+                <td><input type="number" name="gst[]"    id="gst${count}" oninput="calculateRow(${count})"></td>
+                <td><input type="number" name="subTotal[]" id="amount${count}" readonly></td>
             `;
-
             count++;
         }
 
 
         function calculateRow(index) {
-            const quantity = parseFloat(document.getElementById(`qty${index}`).value) || 0;
+            const quantity = parseFloat(document.getElementById(`quantity${index}`).value) || 0;
             const rate = parseFloat(document.getElementById(`rate${index}`).value) || 0;
             const gst = parseFloat(document.getElementById(`gst${index}`).value) || 0;
 
@@ -229,13 +197,13 @@ $products = $stockItem->getAll();
             let totalSgst = 0;
 
             for (let i = 0; i < count; i++) {
-                const qtyEl = document.getElementById(`qty${i}`);
+                const quantityEl = document.getElementById(`quantity${i}`);
                 const rateEl = document.getElementById(`rate${i}`);
                 const gstEl = document.getElementById(`gst${i}`);
 
-                if (!qtyEl) continue; // row may not exist yet
+                if (!quantityEl) continue; // row may not exist yet
 
-                const quantity = parseFloat(qtyEl.value) || 0;
+                const quantity = parseFloat(quantityEl.value) || 0;
                 const rate = parseFloat(rateEl.value) || 0;
                 const gst = parseFloat(gstEl.value) || 0;
 

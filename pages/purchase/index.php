@@ -2,7 +2,6 @@
 
 use Sarma\MisForPrabhatElectronics\App\Controllers\PurchaseController;
 
-
 $purchaseController = new PurchaseController();
 $purchase = $purchaseController->getAll();
 
@@ -51,25 +50,23 @@ $purchase = $purchaseController->getAll();
         <thead>
           <tr>
             <th>ID</th>
-            <th>Category</th>
-            <th>Device</th>
-            <th>Brand</th>
+            <th>Supplier</th>
+            <th>Purchase Date</th>
             <th>Total Amount</th>
+            <th>Payment Status</th>
           </tr>
         </thead>
         <tbody>
           <?php
           foreach ($purchase as $purchase) {
-            
+
           ?>
             <tr>
-
               <td><?= $purchase['purchase_id'] ?></td>
               <td><?= $purchase['supplier_id'] ?></td>
               <td><?= $purchase['purchase_date'] ?></td>
               <td><?= $purchase['total_amount'] ?></td>
               <td><?= $purchase['payment_status'] ?></td>
-
             </tr>
           <?php } ?>
     </div>
