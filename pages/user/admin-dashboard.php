@@ -19,63 +19,64 @@
       <h1>Dashboard</h1>
       <span>Admin</span>
     </div>
-    <!-- Cards -->
-    <div class="card">
-      <h3>Total Sales</h3>
-      <p></p>
+    <div class="cards">
+      <div class="card">
+        <h3>Total Stock</h3>
+        <p> 50</p>
+      </div>
+      <div class="card">
+        <h3>Orders</h3>
+        <p>
+        </p>
+      </div>
+      <div class="card">
+        <h3>Pending Purchase</h3>
+        <p></p>
+      </div>
+      <div class="card">
+        <h3>Completed services</h3>
+        <p></p>
+      </div>
     </div>
-    <div class="card">
-      <h3>Orders</h3>
-      <p>
-      </p>
+
+    <!-- Table -->
+    <div class="table-container">
+      <h3>Dashboard</h3>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Device</th>
+            <th>Issue</th>
+            <th>Status</th>
+          </tr>
+
+          <tr>
+            <td>#101</td>
+            <td>Name</td>
+            <td>Television</td>
+            <td>Screen issue</td>
+            <td><span class="status pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#102</td>
+            <td>Anita Singh</td>
+            <td>Mobile</td>
+            <td>Battery replacement</td>
+            <td><span class="status inprogress">In Progress</span></td>
+          </tr>
+          <tr>
+            <td>#103</td>
+            <td>Vikas Sharma</td>
+            <td>TV</td>
+            <td>No display</td>
+            <td><span class="status completed">Completed</span></td>
+          </tr>
+          </tbody>
+      </table>
     </div>
-    <div class="card">
-      <h3>Pending Repairs</h3>
-      <p></p>
-    </div>
-    <div class="card">
-      <h3>Completed Services</h3>
-      <p></p>
-    </div>
-  <!-- Table -->
-  <div class="table-container">
-    <h3>Recent Service Requests</h3>
-    <br>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Customer</th>
-          <th>Device</th>
-          <th>Issue</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>#101</td>
-          <td>Name</td>
-          <td>Television</td>
-          <td>Screen issue</td>
-          <td><span class="status pending">Pending</span></td>
-        </tr>
-        <tr>
-          <td>#102</td>
-          <td>Anita Singh</td>
-          <td>Mobile</td>
-          <td>Battery replacement</td>
-          <td><span class="status inprogress">In Progress</span></td>
-        </tr>
-        <tr>
-          <td>#103</td>
-          <td>Vikas Sharma</td>
-          <td>TV</td>
-          <td>No display</td>
-          <td><span class="status completed">Completed</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
   </div>
   </div>
 </body>

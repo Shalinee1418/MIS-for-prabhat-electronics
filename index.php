@@ -45,7 +45,7 @@ switch ($request) {
     case "/purchase/create":
         include $page_path . "purchase/create.php";
         break;
-        case "/purchase/store":
+    case "/purchase/store":
         $purchaseController = new PurchaseController();
         $purchaseController->create(new Request());
         break;
@@ -63,6 +63,11 @@ switch ($request) {
     case "/sale/edit":
         include $page_path . "sales/edit.php";
         break;
+
+    case "/service":
+        include $page_path . "service/index.php";
+        break;
+
     default:
         include $page_path . "error.php";
 }
