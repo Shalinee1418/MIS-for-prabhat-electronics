@@ -27,16 +27,16 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ServiceController;
         </div>
         <div class="cards">
             <div class="card">
-                <h3>Total Stock</h3>
+                <h3>Total Service</h3>
                 <p> 50</p>
             </div>
             <div class="card">
-                <h3>Orders</h3>
+                <h3>Pending service</h3>
                 <p>
                 </p>
             </div>
             <div class="card">
-                <h3>Pending Purchase</h3>
+               <h3><a href="/service/index" class="button">New Service</a></h3>
                 <p></p>
             </div>
             <div class="card">
