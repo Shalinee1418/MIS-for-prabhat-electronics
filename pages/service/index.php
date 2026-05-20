@@ -36,7 +36,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ServiceController;
                 </p>
             </div>
             <div class="card">
-               <h3><a href="/service/index" class="button">New Service</a></h3>
+               <h3><a href="/service/create" class="button">New Service</a></h3>
                 <p></p>
             </div>
             <div class="card">
