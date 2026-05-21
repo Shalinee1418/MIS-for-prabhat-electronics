@@ -24,13 +24,27 @@
 
         <!-- Table -->
         <div class="form-container">
-            <form action="" class="form-type-1">
-                <label for="">Name</label>
+            <form action="" class="form-type-1" method="post">
+                <label for="">Sl No:-</label>
+                <input type="number" name="" id="">
+                <label for="">Type</label>
                 <input type="text" name="" id="">
-                 <label for="">Device</label>
+                <label for="">Device</label>
                 <input type="text" name="" id="">
                 <label for="">Issue</label>
                 <input type="text" name="" id="">
+                <label for="">Service Required</label> 
+                <select name="serviceRequired">
+                    <option value="Repairing">Repair</option>
+                    <option value="">Replacement</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+                <label for="">Customer Detail</label>
+                <input type="text" name="" id="">
+                <label for="">Estimate Cost </label>
+                <input type="text" name="" id="">
+
 
                 <button class="primary">Submit</button>
             </form>

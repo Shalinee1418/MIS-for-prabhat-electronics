@@ -6,7 +6,7 @@
     <a href="/purchase">Purchase</a>
     <a href="/service">Service Requests</a>
     <a href="/sale">Sales</a>
-    <a href="/service">Suppliers</a>
+    <a href="/supplier">Suppliers</a>
     <a href="/customer">Customers</a>
     <a href="/reports">Reports</a>
     <a href="/settings">Settings</a>

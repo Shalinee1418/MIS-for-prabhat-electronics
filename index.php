@@ -63,7 +63,7 @@ switch ($request) {
     case "/sale/edit":
         include $page_path . "sales/edit.php";
         break;
-    case "/service/index":
+    case "/service":
         include $page_path . "service/index.php";
         break;
     case "/service/create":

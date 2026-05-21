@@ -8,7 +8,6 @@ class Purchase
 {
     public $purchaseId;
     public $supplierId;
-    public $supplierName;
     public $purchaseDate;
     public $paymentStatus;
     public $totalAmount;
