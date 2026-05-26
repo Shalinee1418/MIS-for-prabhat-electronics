@@ -27,10 +27,10 @@ class service
     }
     public function create()
     {
-       $query = "INSERT INTO purchase (service_request_id) VALUE (?)";
-       $statement = $this->connection->prepare($query);
-       $statement->bind_param("id", $this->serviceRequestId);
-       return $statement->execute();
+        $query = "INSERT INTO purchase (service_request_id) VALUE (?)";
+        $statement = $this->connection->prepare($query);
+        $statement->bind_param("id", $this->serviceRequestId);
+        return $statement->execute();
     }
     public function save()
     {
@@ -50,4 +50,5 @@ class service
 
         return $stmt->get_result()->fetch_assoc();
     }
+    
 }

@@ -124,12 +124,12 @@ $products = $stockItem->getAll();
                                 <input type="text" name="price[]" id="rate0" oninput="calculateRow(0)">
                             </td>
                             <td>
-                                <!-- <select name="per" oninput="calculateRow(0)">
+                                
                                     <?php foreach ($products as $product): ?>
                                         <option value="<?= $product['per'] ?>"><?= $product['per'] ?></option>
                                     <?php endforeach; ?>
  
-                                </select> -->
+                                </select>
                             </td>
                             <td><input type="number" name="gst[]" id="gst0" oninput="calculateRow(0)" value="18"></td>
                             <td>

@@ -36,7 +36,7 @@
                 <label for="">Service Required</label> 
                 <select name="serviceRequired">
                     <option value="Repairing">Repair</option>
-                    <option value="">Replacement</option>
+                    <option value=""></option>
                     <option value=""></option>
                     <option value=""></option>
                 </select>
