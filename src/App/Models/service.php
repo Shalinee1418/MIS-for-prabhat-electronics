@@ -9,8 +9,11 @@ class service
     public $serviceRequestId;
     public $customerId;
     public $productId;
+    public $requestDate;
     public $deliveryDate;
-    public $warrantyStatus;
+    public $problemDescription;
+    public $serviceStatus;
+    public $serviceCharge;
 
     private $connection;
     public function __construct()
@@ -34,7 +37,7 @@ class service
     }
     public function save()
     {
-        $sql = "INSERT INTO service_requests(serviceRequestId) VALUE('$this->serviceRequesstId')";
+        $sql = "INSERT INTO service_requests(serviceRequestId) VALUE('$this->serviceRequestId')";
         $this->connection->query($sql);
         return $this->connection->insert_id;
     }

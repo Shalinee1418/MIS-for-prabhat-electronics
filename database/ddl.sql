@@ -102,7 +102,8 @@ narration VARCHAR(255),
    email VARCHAR(120),
    gst_number VARCHAR(30),
    city VARCHAR(50),
-   pincode VARCHAR(10)
+   pincode VARCHAR(10),
+   address TEXT
 );
 
 CREATE TABLE account_ledger
@@ -116,15 +117,29 @@ closing_balance DECIMAL NOT NULL,
 
 CREATE TABLE service_requests (
    service_request_id INT AUTO_INCREMENT PRIMARY KEY,
-   customer_id INT,
-   product_id INT,
-   delivery_date DATE,
-   warranty_status VARCHAR(30),
 
-   FOREIGN KEY(customer_id)
+   customer_id INT NOT NULL,
+   product_id INT NOT NULL,
+
+   request_date DATE NOT NULL,
+   delivery_date DATE,
+
+   problem_description TEXT,
+
+
+   service_status ENUM(
+      'Pending',
+      'In Progress',
+      'Completed',
+      'Delivered'
+   ) DEFAULT 'Pending',
+
+   service_charge DECIMAL(10,2),
+
+   FOREIGN KEY (customer_id)
    REFERENCES customers(customer_id),
 
-   FOREIGN KEY(product_id)
+   FOREIGN KEY (product_id)
    REFERENCES product(product_id)
 );
 
@@ -139,22 +154,24 @@ charge_to_customer DECIMAL NOT NULL,
 
 );
 
+CREATE TABLE service_parts_used
+(
+    service_part_used_id INT AUTO_INCREMENT PRIMARY KEY,
 
+    service_request_id INT NOT NULL,
+    product_id INT NOT NULL,
 
-CREATE TABLE service_parts_used (
-   part_used_id INT AUTO_INCREMENT PRIMARY KEY,
-   service_request_id INT,
-   product_id INT,
-   quantity INT,
-   unit_price DECIMAL(12,2),
-   charge_to_customer DECIMAL(12,2),
+    quantity INT NOT NULL,
 
-   FOREIGN KEY(service_request_id)
-   REFERENCES service_requests(service_request_id),
+    unit_price DECIMAL(10,2) NOT NULL,
 
-   FOREIGN KEY(product_id)
-   REFERENCES product(product_id)
+    FOREIGN KEY(service_request_id)
+    REFERENCES service_requests(service_request_id),
+
+    FOREIGN KEY(product_id)
+    REFERENCES product(product_id)
 );
+
 CREATE TABLE payment_status
 (
 payment_id INT AUTO_INCREMENT PRIMARY KEY,
