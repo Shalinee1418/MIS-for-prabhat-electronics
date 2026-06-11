@@ -1,11 +1,9 @@
 <?php
 
-namespace Sarma\MisForPrabhatElectronics\App\Controllers\SupplierController;
-
 use Sarma\MisForPrabhatElectronics\App\Controllers\SupplierController;
 
 $supplierController = new SupplierController();
-$supplier = $supplierController->getAll();
+$suppliers = $supplierController->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,15 +65,21 @@ $supplier = $supplierController->getAll();
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($supplier as $supplier) { ?>
+          <?php if (!empty($suppliers)): ?>
+            <?php foreach ($suppliers as $supplier): ?>
+              <tr>
+                <td><?= htmlspecialchars($supplier['supplier_id']) ?></td>
+                <td><?= htmlspecialchars($supplier['supplier_name']) ?></td>
+                <td><?= htmlspecialchars($supplier['phone']) ?></td>
+                <td><?= htmlspecialchars($supplier['email']) ?></td>
+                <td><?= htmlspecialchars($supplier['address']) ?></td>
+              </tr>
+            <?php endforeach; ?>
+          <?php else: ?>
             <tr>
-              <td><?= $supplier['supplier_id'] ?></td>
-              <td><?= $supplier['supplier_name'] ?></td>
-              <td><?= $supplier['phone'] ?></td>
-              <td><?= $supplier['email'] ?></td>
-              <td><?= $supplier['address'] ?></td>
+              <td colspan="5">No suppliers found.</td>
             </tr>
-          <?php } ?>
+          <?php endif; ?>
 
         </tbody>
       </table>

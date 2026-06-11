@@ -7,6 +7,7 @@ password VARCHAR(100)
 CREATE TABLE supplier
 (
 supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+supplier_name VARCHAR(100) NOT NULL,
 phone CHAR(10) UNIQUE NOT NULL,
 email VARCHAR(255),
 address CHAR(255)
@@ -245,21 +246,22 @@ CREATE TABLE invoice_items (
 --    REFERENCES customers(customer_id)
 -- );
 
--- CREATE TABLE sale_items (
---    sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
---    sale_id INT NOT NULL,
---    product_id INT NOT NULL,
---    quantity INT,
---    unit_price DECIMAL(12,2),
---    discount DECIMAL(12,2),
---    tax_amount DECIMAL(12,2),
+CREATE TABLE sale_items (
+   sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
+   sale_id INT NOT NULL,
+   product_id INT NOT NULL,
+   quantity INT,
+   unit_price DECIMAL(12,2),
+   discount DECIMAL(12,2),
+   tax_amount DECIMAL(12,2),
 
---    FOREIGN KEY(sale_id)
---    REFERENCES sales(sale_id),
+   FOREIGN KEY(sale_id)
+   REFERENCES sale(sale_id),
 
---    FOREIGN KEY(product_id)
---    REFERENCES products(product_id)
--- );
+   FOREIGN KEY(product_id)
+   REFERENCES product(product_id)
+      
+);
 -- CREATE TABLE payments (
 --    payment_id INT AUTO_INCREMENT PRIMARY KEY,
 

@@ -3,7 +3,7 @@
 use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 
 $saleController = new SaleController();
-// $sales = $saleController->getAll();
+$sales = $saleController->getAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,22 +58,26 @@ $saleController = new SaleController();
         <thead>
           <tr>
             <th>ID</th>
+            <th>Name of Item</th>
+            <th>Category</th>
             <th>Customer</th>
-            <th>Device</th>
             <th>Payment</th>
+            <th>Sale Date</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($sales as $sale): ?>
             <tr>
-              <td><?= $sale['id'] ?? '' ?></td>
+              <td><?= $sale['sale_id'] ?? '' ?></td>
               <td><?= $sale['customer'] ?? '' ?></td>
+              <td><?= $sale['category'] ?? '' ?></td>
               <td><?= $sale['device'] ?? '' ?></td>
               <td><?= $sale['payment'] ?? '' ?></td>
+              <td><?= $sale['sale_date'] ?? '' ?></td>
+              <td><a href="/sale/view?id=<?= $sale['id'] ?? '' ?>">View</a></td>
             </tr>
           <?php endforeach; ?>
-          <td><a href="/sale/edit?id=<?= $sale['id'] ?? '' ?>">Edit</a></td>
           </tr>
           <?php  ?>
         </tbody>

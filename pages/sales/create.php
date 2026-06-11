@@ -5,7 +5,7 @@ use Sarma\MisForPrabhatElectronics\App\Models\StockItem;
 $stockItem = new StockItem();
 $productNames = $stockItem->getProductName();
 
-$current_date = date('d-m-Y');
+$current_date = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,10 @@ $current_date = date('d-m-Y');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Sale</title>
+    <title>Sales Entry</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
@@ -24,134 +27,288 @@ $current_date = date('d-m-Y');
 
     <!-- Main Content -->
     <div class="main">
-        <div class="header">
-            <h1>New Sale </h1>
-            <span>Admin</span>
-        </div>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial, sans-serif;
+            }
 
-        <!-- Table -->
-        <form action="/sale/store" method="post">
-            <div class="form-container">
-                <div class="customer">
-                    <div class="left">
-                        <span>
-                            <p>Customer name : <input type="text"> </p>
-                        </span>
-                        <span>
-                            <div class="date-row">
-                                <input type="text" value="<?= $current_date ?>" readonly>
+            body {
+                background: #f5f5f5;
+                padding: 20px;
+            }
 
-                        </span>
+            .sales-form {
+                width: 100%;
+                max-width: 1200px;
+                margin: auto;
+                background: white;
+                border: 1px solid #ccc;
+            }
+
+            .header {
+                background: #3085c3;
+                color: white;
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .voucher-info {
+                padding: 15px;
+            }
+
+            .row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .row label {
+                width: 150px;
+                font-weight: bold;
+            }
+
+            .row input {
+                width: 300px;
+                padding: 6px;
+            }
+
+            .table-container {
+                border-top: 1px solid #ccc;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            thead {
+                background: #f2f2f2;
+            }
+
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            input[type="text"],
+            input[type="number"] {
+                width: 100%;
+                border: none;
+                outline: none;
+                padding: 5px;
+            }
+
+            .add-btn {
+                margin: 10px;
+                padding: 5px 12px;
+                cursor: pointer;
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px;
+            }
+
+            .narration {
+                width: 65%;
+            }
+
+            .narration textarea {
+                width: 100%;
+                height: 100px;
+                resize: none;
+                padding: 10px;
+            }
+
+            .summary {
+                width: 30%;
+            }
+
+            .summary .field {
+                display: flex;
+                margin-bottom: 10px;
+            }
+
+            .summary label {
+                width: 100px;
+                font-weight: bold;
+            }
+
+            .summary input {
+                flex: 1;
+                padding: 6px;
+            }
+
+            .footer {
+                background: #eaeaea;
+                padding: 10px;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .footer button {
+                padding: 8px 20px;
+                cursor: pointer;
+            }
+        </style>
+        </head>
+
+        <body>
+            <form action="/sale/store" method="post">
+
+
+                <div class="sales-form">
+
+                    <div class="header">
+                        <h3>Sales Entry</h3>
+                        <span><?php echo $current_date; ?></span>
                     </div>
-                    <style>
-                        .header-row {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            font-weight: bold;
-                        }
 
-                        .date-row {
-                            margin-top: 5px;
+                    <div class="voucher-info">
 
-                            color: #555;
-                        }
-                    </style>
+                        <div class="row">
+                            <label>Party A/C Name</label>
+                            <input type="text">
+                        </div>
 
-                    <div class="header-row">
-                        <span>New Sale</span>
-                        <span>Admin</span>
+                        <div class="row">
+                            <label>Sales Ledger</label>
+                            <input type="text">
+                        </div>
+
                     </div>
 
+                    <div class="table-container">
 
-                    </style>
-                    </head>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="50%">Item Name</th>
+                                    <th>Qty</th>
+                                    <th>Unit</th>
+                                    <th>Rate</th>
+                                    <th>GST %</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
 
-                    <body>
+                            <tbody id="itemTable">
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="number" class="qty"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="number" class="rate"></td>
+                                    <td><input type="number" class="gst"></td>
+                                    <td><input type="number" class="amount" readonly></td>
+                                </tr>
+                            </tbody>
 
-                        <table border="1" id="invoiceTable">
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Rate</th>
-                                <th>Per</th>
-                                <th>Amount</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text" name="item" id="item" list="product_names">
-                                    <datalist id="product_names">
-                                        <?php foreach ($productNames as $productName) { ?>
-                                            <option value="<?= $productName[0] ?>"></option>
-                                        <?php } ?>
-                                    </datalist>
-                                </td>
-                                <td><input type="text" name="" id=""></td>
-                                <td><input type="text" name="" id=""></td>
-                                <td><input type="text" name="" id=""></td>
-                                <td><input type="text" name="" id=""></td>
-                            </tr>
                         </table>
-                        <button class="primary">Submit</button>
+                    </div>
 
-                        <button type="button" onclick="addRow()">Add Item</button>
-        </form>
+                    <div class="bottom">
 
-        <script>
-            let count = 1;
+                        <div class="narration">
+                            <label><b>Narration</b></label>
+                            <textarea></textarea>
+                        </div>
 
-            function addRow() {
-                let table = document.getElementById("invoiceTable");
+                        <div class="summary">
 
-                let row = table.insertRow();
+                            <div class="field">
+                                <label>Total</label>
+                                <input type="text" id="total" readonly>
+                            </div>
 
-                row.innerHTML = ` 
-        <td><input type="text" name="item${count}" list="product_names"></td>
-        <td>
-            <label></label>
-            <input type="number" name="qty${count}">
-        </td>
-        <td>
-            <label></label>
-            <input type="number" name="rate${count}">
-        </td>
-        <td><input type="text" name="per${count}"></td>
-        <td><input type="number" name="amount${count}"></td>
-        
-    `;
+                            <div class="field">
+                                <label>CGST</label>
+                                <input type="text">
+                            </div>
 
-                count++;
-            }
+                            <div class="field">
+                                <label>SGST</label>
+                                <input type="text">
+                            </div>
 
-            function calculateGST() {
+                            <div class="field">
+                                <label>Discount</label>
+                                <input type="text">
+                            </div>
 
-            
-                    let subtotal = 0;
-                document.querySelectorAll('[id^="rowamount"]').forEach(input => {
-                    subtotal += parseFloat(input.value) || 0;
+                            <div class="field">
+                                <label>Sub Total</label>
+                                <input type="text">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="footer">
+
+                        <div class="btn-row">
+                            <button type="button" onclick="addRow()">Add Row</button>
+                            <button type="button" onclick="removeRow()">Remove Row</button>
+                        </div>
+
+                        <br>
+
+                        <button type="submit">Save Sale</button>
+
+            </form>
+
+            <script>
+                row.innerHTML = `
+                   
+                function addRow() {
+
+                    const table = document.getElementById('itemTable');
+
+                    const row = document.createElement('tr');
+                     <td><input type="text"></td>
+                    <td><input type="number" class="qty"></td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="rate"></td>
+                    <td><input type="number" class="gst"></td>
+                    <td><input type="number" class="amount" readonly></td>
+               
+
+      
+                    table.appendChild(row);
+                }
+ `;
+
+                function removeRow() {
+
+                    const table = document.getElementById('itemTable');
+
+                    if (table.rows.length > 1) {
+                        table.deleteRow(table.rows.length - 1);
+                    }
+                }
+                document.addEventListener('input', function (e) {
+                    if (e.target.classList.contains('qty') || e.target.classList.contains('rate') || e.target.classList.contains('gst')) {
+                        const row = e.target.closest('tr');
+                        const qty = parseFloat(row.querySelector('.qty').value) || 0;
+                        const rate = parseFloat(row.querySelector('.rate').value) || 0;
+                        const gst = parseFloat(row.querySelector('.gst').value) || 0;
+
+                        const amount = qty * rate;
+                        const gstAmount = amount * (gst / 100);
+                        row.querySelector('.amount').value = (amount + gstAmount).toFixed(2);
+
+                        calculateTotal();
+                    }
                 });
+            </script>
 
-                let subtotalEl = document.getElementById('amount');
-                if (subtotalEl) subtotalEl.value = subtotal.toFixed(2);
-
-                let gstRate = parseFloat(document.getElementById('gstRate').value) || 0;
-
-                let cgst = (subtotal * (gstRate / 2)) / 100;
-                let sgst = (subtotal * (gstRate / 2)) / 100;
-                let total = subtotal + cgst + sgst;
-
-                let cgstEl = document.getElementById('cgst');
-                let sgstEl = document.getElementById('sgst');
-                let totalEl = document.getElementById('total');
-
-                if (cgstEl) cgstEl.value = cgst.toFixed(2);
-                if (sgstEl) sgstEl.value = sgst.toFixed(2);
-                if (totalEl) totalEl.value = total.toFixed(2);
-            }
-        </script>
-
-        </script>
-
-
-</body>
+        </body>
 
 </html>

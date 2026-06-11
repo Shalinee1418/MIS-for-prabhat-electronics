@@ -9,7 +9,7 @@
         }
 
         .container {
-            width: 400px;
+            width: 800px;
             margin: right;
         }
 

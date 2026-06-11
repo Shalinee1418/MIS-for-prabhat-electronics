@@ -62,9 +62,21 @@ switch ($request) {
         $saleController = new SaleController();
         $saleController->store(new Request());
         break;
+    case "/sale/update":
+        $saleController = new SaleController();
+        $saleController->update(new Request());
+        break;
     case "/sale/edit":
         include $page_path . "sales/edit.php";
         break;
+    case "/sales_items":
+        include $page_path . "sales_items/index.php";
+        break;
+
+case "/sales_items/create":
+        include $page_path . "sales_items/create.php";
+        break;
+
     case "/service":
         include $page_path . "service/index.php";
         break;
@@ -83,7 +95,7 @@ switch ($request) {
         break;
     case "/supplier":
         include $page_path . "supplier/index.php";
-        break;  
+        break;
     case "/supplier/create":
         include $page_path . "supplier/create.php";
         break;
