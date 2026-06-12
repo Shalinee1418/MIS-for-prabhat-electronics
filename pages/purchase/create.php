@@ -79,10 +79,18 @@ $products = $stockItem->getAll();
             <span>Admin</span>
         </div>
 
+        <!-- Build a JS-accessible product map for per/unit lookups -->
+        <script>
+            const productPerMap = {
+                <?php foreach ($products as $product): ?>
+                    "<?= $product['product_id'] ?>": "<?= htmlspecialchars($product['per']) ?>",
+                <?php endforeach; ?>
+            };
+        </script>
+
         <form action="/purchase/store" method="post">
             <div class="form-container">
 
-                <!-- Supplier + Date -->
                 <div class="top-bar">
                     <span>
                         Supplier:
@@ -96,6 +104,7 @@ $products = $stockItem->getAll();
                     </span>
                     <input type="text" name="purchaseDate" value="<?= date('Y-m-d') ?>" readonly style="padding:5px;">
                 </div>
+
                 <table border="1" id="invoiceTable">
                     <thead>
                         <tr>
@@ -108,45 +117,42 @@ $products = $stockItem->getAll();
                         </tr>
                     </thead>
                     <tbody>
-
                         <tr>
                             <td>
-                                <select name="productId[]" id="product_id0" oninput="calculateRow(0)">
+                                <select name="productId[]" id="product_id0" oninput="calculateRow(0); updatePer(0)">
                                     <?php foreach ($products as $product): ?>
                                         <option value="<?= $product['product_id'] ?>"><?= $product['name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
                             <td>
-                                <input type="text" name="quantity[]" id="quantity0" oninput="calculateRow(0)">
+                                <input type="number" name="quantity[]" id="quantity0" oninput="calculateRow(0)">
                             </td>
                             <td>
-                                <input type="text" name="price[]" id="rate0" oninput="calculateRow(0)">
+                                <input type="number" name="price[]" id="rate0" oninput="calculateRow(0)">
                             </td>
                             <td>
-                                
-                                    <?php foreach ($products as $product): ?>
-                                        <option value="<?= $product['per'] ?>"><?= $product['per'] ?></option>
-                                    <?php endforeach; ?>
- 
-                                </select>
+                                <!-- FIX 1: was missing opening <select> tag and had orphaned </select> -->
+                                <input type="text" name="per[]" id="per0" readonly>
                             </td>
-                            <td><input type="number" name="gst[]" id="gst0" oninput="calculateRow(0)" value="18"></td>
                             <td>
-                                <input type="text" name="subTotal[]" id="amount0" oninput="calculateRow(0)">
+                                <input type="number" name="gst[]" id="gst0" oninput="calculateRow(0)" value="18">
+                            </td>
+                            <td>
+                                <input type="number" name="subTotal[]" id="amount0" readonly>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Totals -->
                 <div class="totals-box">
                     <div>CGST: ₹<span id="totalCgst">0.00</span></div>
                     <div>SGST: ₹<span id="totalSgst">0.00</span></div>
-                    <div><strong>Grand Total: ₹<input type="text" name="totalAmount" id="totalAmount" readonly>0.00</span></strong></div>
+                  
+                    <div><strong>Grand Total: ₹<input type="text" name="totalAmount" id="totalAmount" readonly></strong></div>
                 </div>
 
-                <!-- Buttons -->
+           
                 <div class="btn-row">
                     <button type="button" onclick="addRow()">+ Add Item</button>
                     <button type="submit" class="primary">Submit</button>
@@ -159,66 +165,84 @@ $products = $stockItem->getAll();
     <script>
         let count = 1;
 
+      
+        function updatePer(index) {
+            const productSelect = document.getElementById(`product_id${index}`);
+            const perInput = document.getElementById(`per${index}`);
+            if (productSelect && perInput) {
+                perInput.value = productPerMap[productSelect.value] || '';
+            }
+        }
+
+
+        window.addEventListener('DOMContentLoaded', () => updatePer(0));
+
         function addRow() {
             const tbody = document.querySelector("#invoiceTable tbody");
             const row = tbody.insertRow();
 
+            const productOptions = `<?php foreach ($products as $p): ?><option value="<?= $p['product_id'] ?>"><?= $p['name'] ?></option><?php endforeach; ?>`;
+
             row.innerHTML = `
-                <td><input type="text"   name="productId[]"   list="product_names" oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="quantity[]"    id="quantity${count}" oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="price[]"   id="rate${count}" oninput="calculateRow(${count})"></td>
-                <td><input type="text"   name="per[]"    id="per${count}"></td>
-                <td><input type="number" name="gst[]"    id="gst${count}" oninput="calculateRow(${count})"></td>
-                <td><input type="number" name="subTotal[]" id="amount${count}" readonly></td>
+                <td>
+                    <select name="productId[]" id="product_id${count}"
+                        oninput="calculateRow(${count}); updatePer(${count})">
+                        ${productOptions}
+                    </select>
+                </td>
+                <td><input type="number" name="quantity[]" id="quantity${count}" oninput="calculateRow(${count})"></td>
+                <td><input type="number" name="price[]"    id="rate${count}"     oninput="calculateRow(${count})"></td>
+                <td><input type="text"   name="per[]"      id="per${count}"      readonly></td>
+                <td><input type="number" name="gst[]"      id="gst${count}"      oninput="calculateRow(${count})" value="18"></td>
+                <td><input type="number" name="subTotal[]" id="amount${count}"   readonly></td>
             `;
+
+            updatePer(count); // pre-fill "per" for the newly added row
             count++;
         }
 
-
         function calculateRow(index) {
             const quantity = parseFloat(document.getElementById(`quantity${index}`).value) || 0;
-            const rate = parseFloat(document.getElementById(`rate${index}`).value) || 0;
-            const gst = parseFloat(document.getElementById(`gst${index}`).value) || 0;
+            const rate     = parseFloat(document.getElementById(`rate${index}`).value)     || 0;
+            const gst      = parseFloat(document.getElementById(`gst${index}`).value)      || 0;
 
             const amount = quantity * rate;
-            const cgst = (amount * (gst / 2)) / 100;
-            const sgst = (amount * (gst / 2)) / 100;
-            const total = amount + cgst + sgst;
+            const cgst   = (amount * (gst / 2)) / 100;
+            const sgst   = (amount * (gst / 2)) / 100;
+            const total  = amount + cgst + sgst;
 
             document.getElementById(`amount${index}`).value = total.toFixed(2);
-
-            updatetotalAmount();
+            updateTotalAmount();
         }
 
-
-        function updatetotalAmount() {
+        function updateTotalAmount() {
             let totalAmount = 0;
-            let totalCgst = 0;
-            let totalSgst = 0;
+            let totalCgst   = 0;
+            let totalSgst   = 0;
 
             for (let i = 0; i < count; i++) {
                 const quantityEl = document.getElementById(`quantity${i}`);
-                const rateEl = document.getElementById(`rate${i}`);
-                const gstEl = document.getElementById(`gst${i}`);
+                const rateEl     = document.getElementById(`rate${i}`);
+                const gstEl      = document.getElementById(`gst${i}`);
 
-                if (!quantityEl) continue; // row may not exist yet
+                if (!quantityEl) continue;
 
                 const quantity = parseFloat(quantityEl.value) || 0;
-                const rate = parseFloat(rateEl.value) || 0;
-                const gst = parseFloat(gstEl.value) || 0;
+                const rate     = parseFloat(rateEl.value)     || 0;
+                const gst      = parseFloat(gstEl.value)      || 0;
 
                 const amount = quantity * rate;
-                const cgst = (amount * (gst / 2)) / 100;
-                const sgst = (amount * (gst / 2)) / 100;
+                const cgst   = (amount * (gst / 2)) / 100;
+                const sgst   = (amount * (gst / 2)) / 100;
 
-                totalCgst += cgst;
-                totalSgst += sgst;
+                totalCgst   += cgst;
+                totalSgst   += sgst;
                 totalAmount += amount + cgst + sgst;
             }
 
-            document.getElementById("totalCgst").textContent = totalCgst.toFixed(2);
-            document.getElementById("totalSgst").textContent = totalSgst.toFixed(2);
-            document.getElementById("totalAmount").value = totalAmount.toFixed(2);
+            document.getElementById("totalCgst").textContent  = totalCgst.toFixed(2);
+            document.getElementById("totalSgst").textContent  = totalSgst.toFixed(2);
+            document.getElementById("totalAmount").value      = totalAmount.toFixed(2);
         }
     </script>
 

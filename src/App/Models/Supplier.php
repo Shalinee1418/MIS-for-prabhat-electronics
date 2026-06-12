@@ -51,14 +51,14 @@ class Supplier
         $sql = "UPDATE supplier SET supplier_name='$this->supplierName', phone='$this->phone', email='$this->email', address='$this->address' WHERE supplier_id=$this->supplierId";
         $this->connection->query($sql);
     }
-    //     public static function all(): array
-    //     {
-    //         $connection = DbConfig::getConnection();
-    //         $sql = "SELECT * FROM supplier";
-    //         $result = $connection->query($sql);
-    //         $connection->close();
-    //         return $result->fetch_all(MYSQLI_ASSOC);
-    //     }
+        public static function all(): array
+        {
+            $connection = DbConfig::getConnection();
+            $sql = "SELECT * FROM supplier";
+            $result = $connection->query($sql);
+            $connection->close();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
 
     //     // public static function find(int $id): array
     //     // {

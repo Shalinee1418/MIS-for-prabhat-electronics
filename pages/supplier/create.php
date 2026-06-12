@@ -1,187 +1,160 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-<title>Supplier Form</title>
+        body {
+            background: #f0f2f5;
+        }
 
-<style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 100vh;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+        .supplier-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-body{
-    background:#f1f1f3;
-    padding:20px;
-}
+        .form-header {
+            background: #3085c3;
+            padding: 12px 20px;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* TOP TITLE BOX */
+        .form-header h2 {
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+        }
 
-.header{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    margin-bottom:25px;
-}
+        .form-header span {
+            font-size: 13px;
+            color: #d6eaf8;
+        }
 
-.header h1{
-    font-size:60px;
-    font-weight:bold;
-}
+        .form-body {
+            flex: 1;
+            padding: 30px;
+        }
 
-/* FORM BOX */
+        .field {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
 
-.form-box{
-    background:white;
-    padding:40px;
-    border-radius:12px;
-}
+        .field label {
+            width: 180px;
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            padding-top: 9px;
+        }
 
-/* EACH ROW */
+        .field label span {
+            color: red;
+        }
 
-.form-group{
-    display:flex;
-    align-items:flex-start;
-    margin-bottom:35px;
-}
+        .field input,
+        .field textarea {
+            flex: 1;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
 
-/* LEFT LABEL */
+        .field textarea {
+            height: 90px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+        }
 
-.form-label{
-    width:300px;
-}
+        .form-footer {
+            background: #eaeaea;
+            padding: 12px 20px;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 4px 4px;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-.form-label label{
-    font-size:22px;
-    font-weight:bold;
-}
-
-.form-label span{
-    color:red;
-}
-
-/* RIGHT SIDE */
-
-.form-input{
-    flex:1;
-}
-
-.form-input p{
-    color:#666;
-    font-size:18px;
-    margin-bottom:10px;
-}
-
-input,
-textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid #ccc;
-    border-radius:6px;
-    font-size:16px;
-}
-
-textarea{
-    height:140px;
-}
-
-/* BUTTON */
-
-button{
-    background:#1565ff;
-    color:white;
-    border:none;
-    padding:15px 35px;
-    font-size:22px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#0d56e0;
-}
-
-</style>
+        .form-footer button {
+            padding: 9px 28px;
+            background: #3085c3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Sidebar -->
     <aside class="sidebar">
         <?php include $_SERVER['DOCUMENT_ROOT'] . "/pages/include/aside.php" ?>
     </aside>
 
-    <div class="header">
-        <h1>New Supplier</h1>
+    <div class="main">
+        <form action="/supplier/store" method="post" style="flex:1; display:flex; flex-direction:column;">
+            <div class="supplier-form">
+
+                <div class="form-header">
+                    <h2>New Supplier</h2>
+                    <span>Admin</span>
+                </div>
+
+                <div class="form-body">
+                    <div class="field">
+                        <label>Supplier Name <span>*</span></label>
+                        <input type="text" name="supplierName" placeholder="Enter the full name of the supplier" required>
+                    </div>
+                    <div class="field">
+                        <label>Phone Number <span>*</span></label>
+                        <input type="text" name="phone" placeholder="Enter a valid contact number" required>
+                    </div>
+                    <div class="field">
+                        <label>Email <span>*</span></label>
+                        <input type="email" name="email" placeholder="Enter a valid email address" required>
+                    </div>
+                    <div class="field">
+                        <label>Address <span>*</span></label>
+                        <textarea name="address" placeholder="Enter the complete address" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <button type="submit">Submit</button>
+                </div>
+
+            </div>
+        </form>
     </div>
-
-    <form action="/supplier/store" method="post">
-        <div class="form-container">
-
-    <div class="form-group">
-
-        <div class="form-label">
-            <label>Supplier Name <span>*</span></label>
-        </div>
-
-        <div class="form-input">
-            <p>Enter the full name of the supplier.</p>
-            <input type="text" name="supplierName" required>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-
-        <div class="form-label">
-            <label>Phone Number <span>*</span></label>
-        </div>
-
-        <div class="form-input">
-            <p>Enter a valid contact number.</p>
-            <input type="text" name="phone" required>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-
-        <div class="form-label">
-            <label>Email <span>*</span></label>
-        </div>
-
-        <div class="form-input">
-            <p>Enter a valid email address.</p>
-            <input type="email" name="email" required>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-
-        <div class="form-label">
-            <label>Address <span>*</span></label>
-        </div>
-
-        <div class="form-input">
-            <p>Enter the complete address.</p>
-            <textarea name="address" required></textarea>
-        </div>
-
-    </div>
-
-    <button type="submit">Submit</button>
-
-        </div>
-    </form>
 
 </body>
 </html>
-
-    
-
-   

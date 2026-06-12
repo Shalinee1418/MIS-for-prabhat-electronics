@@ -11,3 +11,27 @@
     <a href="/reports">Reports</a>
     <a href="/settings">Settings</a>
 </nav>
+<style>
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #f0f2f5;
+}
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+</style>
