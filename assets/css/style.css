@@ -13,13 +13,13 @@ body {
 /* Sidebar */
 .logo {
   width: 200px;
- margin-right: 70px;
+  margin-right: 70px;
 }
 
 .sidebar {
   width: 220px;
   height: 100vh;
-  background: #3085c3;
+  background: #16325c;
   color: white;
   padding: 20px;
 }
@@ -169,8 +169,8 @@ table th {
   display: block;
   padding: 5px;
   color: white;
-  background-color: #1F51FF;
-  border-color: #1F51FF;
+  background-color: #1f51ff;
+  border-color: #1f51ff;
   border-radius: 5px;
   margin-top: 10px;
   width: 75px;

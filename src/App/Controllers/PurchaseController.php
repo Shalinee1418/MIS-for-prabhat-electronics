@@ -30,7 +30,7 @@ class PurchaseController
             $purchaseItem->save();
         }
 
-        // header('Location: /purchase');
+        header('Location: /purchase');
         exit;
     }
 
