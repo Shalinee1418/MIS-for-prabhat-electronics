@@ -35,7 +35,7 @@
         }
 
         .form-header {
-            background: #3085c3;
+            background: #0a1628;
             color: white;
             padding: 12px 20px;
             border-radius: 4px 4px 0 0;
