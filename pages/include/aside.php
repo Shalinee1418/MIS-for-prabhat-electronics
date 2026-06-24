@@ -1,19 +1,26 @@
+<?php
+$current = strtok($_SERVER['REQUEST_URI'], '?');
+function navLink(string $href, string $label, string $current): string {
+    $active = ($current === $href) ? ' active' : '';
+    return "<a href=\"$href\" class=\"$active\">$label</a>";
+}
+?>
 <link rel="stylesheet" href="/assets/css/style.css">
-
-<!-- <img src="/assets/images/prabhat_electronics.png" alt="" class="logo"> -->
-    <?php $current = $_SERVER['REQUEST_URI']; ?>
-
+<img src="/assets/images/prabhat_electronics.png" alt="Prabhat Electronics" class="logo"
+     style="width:100%;max-width:160px;display:block;margin:0 auto 24px;">
 <nav>
-    <a href="/user/admin-dashboard" class="<?= $current === '/user/admin-dashboard' ? 'active' : '' ?>">Dashboard</a>
-    <a href="/stock-item"           class="<?= $current === '/stock-item' ? 'active' : '' ?>">Stock Item</a>
-    <a href="/purchase"             class="<?= $current === '/purchase' ? 'active' : '' ?>">Purchase</a>
-    <a href="/service"              class="<?= $current === '/service' ? 'active' : '' ?>">Service Requests</a>
-    <a href="/sale"                 class="<?= $current === '/sale' ? 'active' : '' ?>">Sales</a>
-    <a href="/supplier"             class="<?= $current === '/supplier' ? 'active' : '' ?>">Suppliers</a>
-    <a href="/customer"             class="<?= $current === '/customer' ? 'active' : '' ?>">Customers</a>
-    <a href="/reports"              class="<?= $current === '/reports' ? 'active' : '' ?>">Reports</a>
-    <a href="/settings"             class="<?= $current === '/settings' ? 'active' : '' ?>">Settings</a>
+    <?= navLink('/user/admin-dashboard', 'Dashboard',        $current) ?>
+    <?= navLink('/stock-item',           'Stock Item',       $current) ?>
+    <?= navLink('/purchase',             'Purchase',         $current) ?>
+    <?= navLink('/service',              'Service Requests', $current) ?>
+    <?= navLink('/sale',                 'Sales',            $current) ?>
+    <?= navLink('/supplier',             'Suppliers',        $current) ?>
+    <?= navLink('/customer',             'Customers',        $current) ?>
+    <?= navLink('/reports',              'Reports',          $current) ?>
+    <?= navLink('/settings',             'Settings',         $current) ?>
+    <a href="/auth/logout" style="margin-top:auto;opacity:0.7">Logout</a>
 </nav>
+
 
 <style>
    

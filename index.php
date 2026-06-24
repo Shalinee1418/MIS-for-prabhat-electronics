@@ -9,6 +9,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\SupplierController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\PurchaseController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\SaleController;
 use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\ReportController;
 use Sarma\MisForPrabhatElectronics\App\Core\Request;
 
 $env = Dotenv::createImmutable(__DIR__);
@@ -73,7 +74,7 @@ switch ($request) {
         include $page_path . "sales_items/index.php";
         break;
 
-case "/sales_items/create":
+    case "/sales_items/create":
         include $page_path . "sales_items/create.php";
         break;
 
@@ -103,6 +104,17 @@ case "/sales_items/create":
         $supplierController = new SupplierController();
         $supplierController->create(new Request());
         break;
+    case "/reports":
+        // Auth::require();
+        include $page_path . "reports/index.php";
+        break;
+    case "/reports/export":
+        // Auth::require();
+        $ReportController = new ReportController();
+        $type = $_GET['type'] ?? 'sales';
+        $ReportController->exportCsv($type);
+        break;
+
     default:
         include $page_path . "error.php";
 }
