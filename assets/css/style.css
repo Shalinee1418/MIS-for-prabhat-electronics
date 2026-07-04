@@ -11,13 +11,13 @@ body {
 }
 
 /* Sidebar */
-.logo {
+/* .logo {
   width: 200px;
   margin-right: 70px;
-}
+} */
 
 .sidebar {
-  width: 220px;
+  width: 150px;
   height: 100vh;
   background: #16325c;
   color: white;
@@ -143,6 +143,7 @@ table th {
 /* Form */
 .form-container {
   background: white;
+  width:auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -157,12 +158,12 @@ table th {
 .form-type-1 label {
   display: inline-block;
   padding: 5px;
-  width: 100px;
+  width: 80px;
 }
 
 .form-type-1 input {
   padding: 5px;
-  width: 60%;
+  width: 50%;
 }
 
 .form-type-1 .primary {

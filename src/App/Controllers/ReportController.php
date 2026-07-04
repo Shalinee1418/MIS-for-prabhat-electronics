@@ -128,132 +128,128 @@ class ReportController
     // SERVICE REPORT
     // Returns: service requests grouped by status + detailed list
     // ---------------------------------------------------------------
-    public function serviceReport(): array
-    {
-        // Date range
-        $from = $this->sanitizeDate($_GET['from'] ?? date('Y-m-01'));
-        $to   = $this->sanitizeDate($_GET['to']   ?? date('Y-m-t'));
- 
-        // Status summary
-        $summaryStmt = $this->connection->prepare("
-            SELECT
-                warranty_status,
-                COUNT(service_request_id) AS total
-            FROM service_request
-            WHERE delivery_date BETWEEN ? AND ?
-            GROUP BY warranty_status
-        ");
-        $summaryStmt->bind_param("ss", $from, $to);
-        $summaryStmt->execute();
-        $summary = $summaryStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $summaryStmt->close();
- 
-        // Detailed list with customer name and product name
-        $listStmt = $this->connection->prepare("
-            SELECT
-                sr.service_request_id,
-                c.customer_name,
-                c.phone,
-                p.name          AS product_name,
-                sr.delivery_date,
-                sr.warranty_status
-            FROM service_request sr
-            LEFT JOIN customer c ON sr.customer_id = c.customer_id
-            LEFT JOIN product  p ON sr.stock_item_id = p.product_id
-            WHERE sr.delivery_date BETWEEN ? AND ?
-            ORDER BY sr.delivery_date DESC
-        ");
-        $listStmt->bind_param("ss", $from, $to);
-        $listStmt->execute();
-        $requests = $listStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $listStmt->close();
- 
-        // Total count
-        $countStmt = $this->connection->prepare("
-            SELECT COUNT(service_request_id) AS total_requests
-            FROM service_request
-            WHERE delivery_date BETWEEN ? AND ?
-        ");
-        $countStmt->bind_param("ss", $from, $to);
-        $countStmt->execute();
-        $totals = $countStmt->get_result()->fetch_assoc();
-        $countStmt->close();
- 
-        return [
-            'from'     => $from,
-            'to'       => $to,
-            'summary'  => $summary,
-            'requests' => $requests,
-            'totals'   => $totals,
-        ];
-    }
+   public function serviceReport(): array
+{
+    $from = $this->sanitizeDate($_GET['from'] ?? date('Y-m-01'));
+    $to   = $this->sanitizeDate($_GET['to']   ?? date('Y-m-t'));
+
+    $summaryStmt = $this->connection->prepare("
+        SELECT
+            service_status,
+            COUNT(service_request_id) AS total
+        FROM service_request
+        WHERE delivery_date BETWEEN ? AND ?
+        GROUP BY service_status
+    ");
+    $summaryStmt->bind_param("ss", $from, $to);
+    $summaryStmt->execute();
+    $summary = $summaryStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $summaryStmt->close();
+
+    $listStmt = $this->connection->prepare("
+        SELECT
+            sr.service_request_id,
+            c.customer_name,
+            c.phone,
+            p.name AS product_name,
+            sr.delivery_date,
+            sr.service_status
+        FROM service_request sr
+        LEFT JOIN customers c ON sr.customer_id = c.customer_id
+        LEFT JOIN product  p ON sr.product_id = p.product_id
+        WHERE sr.delivery_date BETWEEN ? AND ?
+        ORDER BY sr.delivery_date DESC
+    ");
+    $listStmt->bind_param("ss", $from, $to);
+    $listStmt->execute();
+    $requests = $listStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $listStmt->close();
+
+    $countStmt = $this->connection->prepare("
+        SELECT COUNT(service_request_id) AS total_requests
+        FROM service_request
+        WHERE delivery_date BETWEEN ? AND ?
+    ");
+    $countStmt->bind_param("ss", $from, $to);
+    $countStmt->execute();
+    $totals = $countStmt->get_result()->fetch_assoc();
+    $countStmt->close();
+
+    return [
+        'from'     => $from,
+        'to'       => $to,
+        'summary'  => $summary,
+        'requests' => $requests,
+        'totals'   => $totals,
+    ];
+}
  
     // ---------------------------------------------------------------
     // PURCHASE REPORT
     // Returns: purchases grouped by date range with supplier info
     // ---------------------------------------------------------------
     public function purchaseReport(): array
-    {
-        $from = $this->sanitizeDate($_GET['from'] ?? date('Y-m-01'));
-        $to   = $this->sanitizeDate($_GET['to']   ?? date('Y-m-t'));
- 
-        // Summary totals
-        $summaryStmt = $this->connection->prepare("
-            SELECT
-                COUNT(purchase_id)      AS total_purchases,
-                SUM(total_amount)       AS total_spent,
-                SUM(tax_amount)         AS total_tax
-            FROM purchase
-            WHERE purchase_date BETWEEN ? AND ?
-        ");
-        $summaryStmt->bind_param("ss", $from, $to);
-        $summaryStmt->execute();
-        $summary = $summaryStmt->get_result()->fetch_assoc();
-        $summaryStmt->close();
- 
-        // Breakdown by payment status
-        $statusStmt = $this->connection->prepare("
-            SELECT
-                payment_status,
-                COUNT(purchase_id)  AS total,
-                SUM(total_amount)   AS amount
-            FROM purchase
-            WHERE purchase_date BETWEEN ? AND ?
-            GROUP BY payment_status
-        ");
-        $statusStmt->bind_param("ss", $from, $to);
-        $statusStmt->execute();
-        $byStatus = $statusStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $statusStmt->close();
- 
-        // Detailed list with supplier info
-        $listStmt = $this->connection->prepare("
-            SELECT
-                p.purchase_id,
-                p.purchase_date,
-                p.total_amount,
-                p.tax_amount,
-                p.payment_status,
-                s.phone     AS supplier_phone,
-                s.email     AS supplier_email
-            FROM purchase p
-            LEFT JOIN supplier s ON p.supplier_id = s.supplier_id
-            WHERE p.purchase_date BETWEEN ? AND ?
-            ORDER BY p.purchase_date DESC
-        ");
-        $listStmt->bind_param("ss", $from, $to);
-        $listStmt->execute();
-        $purchases = $listStmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $listStmt->close();
- 
-        return [
-            'from'      => $from,
-            'to'        => $to,
-            'summary'   => $summary,
-            'by_status' => $byStatus,
-            'purchases' => $purchases,
-        ];
-    }
+{
+    $from = $this->sanitizeDate($_GET['from'] ?? date('Y-m-01'));
+    $to   = $this->sanitizeDate($_GET['to']   ?? date('Y-m-t'));
+
+    // Summary totals
+    $summaryStmt = $this->connection->prepare("
+        SELECT
+            COUNT(purchase_id)      AS total_purchases,
+            SUM(total_amount)       AS total_spent,
+            SUM(tax_amount)         AS total_tax
+        FROM purchase
+        WHERE purchase_date BETWEEN ? AND ?
+    ");
+    $summaryStmt->bind_param("ss", $from, $to);
+    $summaryStmt->execute();
+    $summary = $summaryStmt->get_result()->fetch_assoc();
+    $summaryStmt->close();
+
+    // Breakdown by payment status
+    $statusStmt = $this->connection->prepare("
+        SELECT
+            payment_status,
+            COUNT(purchase_id)  AS total,
+            SUM(total_amount)   AS amount
+        FROM purchase
+        WHERE purchase_date BETWEEN ? AND ?
+        GROUP BY payment_status
+    ");
+    $statusStmt->bind_param("ss", $from, $to);
+    $statusStmt->execute();
+    $byStatus = $statusStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $statusStmt->close();
+
+    // Detailed list with supplier info
+    $listStmt = $this->connection->prepare("
+        SELECT
+            p.purchase_id,
+            p.purchase_date,
+            p.total_amount,
+            p.tax_amount,
+            p.payment_status,
+            s.phone     AS supplier_phone,
+            s.email     AS supplier_email
+        FROM purchase p
+        LEFT JOIN supplier s ON p.supplier_id = s.supplier_id
+        WHERE p.purchase_date BETWEEN ? AND ?
+        ORDER BY p.purchase_date DESC
+    ");
+    $listStmt->bind_param("ss", $from, $to);
+    $listStmt->execute();
+    $purchases = $listStmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $listStmt->close();
+
+    return [
+        'from'      => $from,
+        'to'        => $to,
+        'summary'   => $summary,
+        'by_status' => $byStatus,
+        'purchases' => $purchases,
+    ];
+}
  
     // ---------------------------------------------------------------
     // Helper: sanitize date input to prevent injection in BETWEEN

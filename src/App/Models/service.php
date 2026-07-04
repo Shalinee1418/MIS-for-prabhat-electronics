@@ -23,7 +23,7 @@ class service
 
     public function getAll()
     {
-        $query = "SELECT * FROM service_requests";
+        $query = "SELECT * FROM service_request";
         $statement = $this->connection->prepare($query);
         $statement->execute();
         return $statement->get_result()->fetch_all(MYSQLI_ASSOC);

@@ -47,7 +47,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ServiceController;
 
         <!-- Table -->
         <div class="table-container">
-            <h3>Dashboard</h3>
+            <h3>Service</h3>
             <br>
             <table>
                 <thead>
