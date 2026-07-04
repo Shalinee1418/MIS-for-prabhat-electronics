@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product</title>
-    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+    <title>Customer Entry</title>
     <style>
         * {
             margin: 0;
@@ -22,19 +21,22 @@
             flex-direction: column;
             padding: 20px;
             height: 100vh;
+            min-width: 0;
         }
 
-        .stock-form {
+        .customer-form {
             flex: 1;
             display: flex;
             flex-direction: column;
+            width: 100%;        /* was max-width: 600px — removed */
             background: white;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
         .form-header {
-            background: #3085c3;
+            background: #0a1628;
+            color: white;
             padding: 12px 20px;
             border-radius: 4px 4px 0 0;
             display: flex;
@@ -48,11 +50,6 @@
             color: white;
         }
 
-        .form-header span {
-            font-size: 13px;
-            color: #d6eaf8;
-        }
-
         .form-body {
             flex: 1;
             padding: 30px;
@@ -60,7 +57,7 @@
 
         .field {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -70,10 +67,61 @@
             font-size: 14px;
             font-weight: 400;
             color: #333;
+            padding-top: 7px;
         }
 
-        .field input {
+        .field input,
+        .field textarea {
             flex: 1;
+            min-width: 0;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .field textarea {
+            height: 90px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
+        }
+        .field-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .field-row .sub-label {
+            width: 180px;
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+        }
+
+        .field-row .sub-input {
+            flex: 1;
+            min-width: 0;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .field-row .pincode-label {
+            width: 120px;
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            padding-left: 20px;
+        }
+
+        .field-row .pincode-input {
+            flex: 1;
+            min-width: 0;
             padding: 9px 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -109,35 +157,42 @@
     </aside>
 
     <div class="main">
-        <form action="/stock-item/save" method="post" style="flex:1; display:flex; flex-direction:column;">
-            <div class="stock-form">
+        <form action="/customer/store" method="POST" style="flex:1; display:flex; flex-direction:column;">
+            <div class="customer-form">
 
                 <div class="form-header">
-                    <h2>New Product</h2>
-                    <span>Admin</span>
+                    <h2>Add Customer</h2>
                 </div>
 
                 <div class="form-body">
                     <div class="field">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" placeholder="Product name">
+                        <label>Customer Name</label>
+                        <input type="text" name="customerName" required placeholder="Full name">
                     </div>
                     <div class="field">
-                        <label for="brand">Brand</label>
-                        <input type="text" name="brand" id="brand" placeholder="Brand name">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" placeholder="Phone number">
                     </div>
                     <div class="field">
-                        <label for="group">Group</label>
-                        <input type="text" name="group" id="group" placeholder="Product group / category">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="Email address">
                     </div>
+
+                    <div class="field-row">
+                        <span class="sub-label">City</span>
+                        <input class="sub-input" type="text" name="city" placeholder="City">
+                        <span class="pincode-label">Pincode</span>
+                        <input class="pincode-input" type="number" name="pincode" placeholder="Pincode">
+                    </div>
+
                     <div class="field">
-                        <label for="unit">Unit</label>
-                        <input type="text" name="unit" id="unit" placeholder="e.g. Pcs, Box">
+                        <label>Address</label>
+                        <textarea name="address" placeholder="Full address"></textarea>
                     </div>
                 </div>
 
                 <div class="form-footer">
-                    <button type="submit">Submit</button>
+                    <button type="submit">Save Customer</button>
                 </div>
 
             </div>

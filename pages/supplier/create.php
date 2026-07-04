@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product</title>
-    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+    <title>Supplier Form</title>
     <style>
         * {
             margin: 0;
@@ -24,7 +24,7 @@
             height: 100vh;
         }
 
-        .stock-form {
+        .supplier-form {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -60,7 +60,7 @@
 
         .field {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
         }
 
@@ -70,15 +70,27 @@
             font-size: 14px;
             font-weight: 400;
             color: #333;
+            padding-top: 9px;
         }
 
-        .field input {
+        .field label span {
+            color: red;
+        }
+
+        .field input,
+        .field textarea {
             flex: 1;
             padding: 9px 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
             color: #333;
+        }
+
+        .field textarea {
+            height: 90px;
+            resize: vertical;
+            font-family: Arial, sans-serif;
         }
 
         .form-footer {
@@ -109,30 +121,30 @@
     </aside>
 
     <div class="main">
-        <form action="/stock-item/save" method="post" style="flex:1; display:flex; flex-direction:column;">
-            <div class="stock-form">
+        <form action="/supplier/store" method="post" style="flex:1; display:flex; flex-direction:column;">
+            <div class="supplier-form">
 
                 <div class="form-header">
-                    <h2>New Product</h2>
+                    <h2>New Supplier</h2>
                     <span>Admin</span>
                 </div>
 
                 <div class="form-body">
                     <div class="field">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" placeholder="Product name">
+                        <label>Supplier Name <span>*</span></label>
+                        <input type="text" name="supplierName" placeholder="Enter the full name of the supplier" required>
                     </div>
                     <div class="field">
-                        <label for="brand">Brand</label>
-                        <input type="text" name="brand" id="brand" placeholder="Brand name">
+                        <label>Phone Number <span>*</span></label>
+                        <input type="text" name="phone" placeholder="Enter a valid contact number" required>
                     </div>
                     <div class="field">
-                        <label for="group">Group</label>
-                        <input type="text" name="group" id="group" placeholder="Product group / category">
+                        <label>Email <span>*</span></label>
+                        <input type="email" name="email" placeholder="Enter a valid email address" required>
                     </div>
                     <div class="field">
-                        <label for="unit">Unit</label>
-                        <input type="text" name="unit" id="unit" placeholder="e.g. Pcs, Box">
+                        <label>Address <span>*</span></label>
+                        <textarea name="address" placeholder="Enter the complete address" required></textarea>
                     </div>
                 </div>
 

@@ -11,10 +11,15 @@ body {
 }
 
 /* Sidebar */
+/* .logo {
+  width: 200px;
+  margin-right: 70px;
+} */
+
 .sidebar {
-  width: 220px;
+  width: 150px;
   height: 100vh;
-  background: #3085c3;
+  background: #16325c;
   color: white;
   padding: 20px;
 }
@@ -138,6 +143,7 @@ table th {
 /* Form */
 .form-container {
   background: white;
+  width:auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -152,20 +158,20 @@ table th {
 .form-type-1 label {
   display: inline-block;
   padding: 5px;
-  width: 100px;
+  width: 80px;
 }
 
 .form-type-1 input {
   padding: 5px;
-  width: 60%;
+  width: 50%;
 }
 
 .form-type-1 .primary {
   display: block;
   padding: 5px;
   color: white;
-  background-color: #1F51FF;
-  border-color: #1F51FF;
+  background-color: #1f51ff;
+  border-color: #1f51ff;
   border-radius: 5px;
   margin-top: 10px;
   width: 75px;

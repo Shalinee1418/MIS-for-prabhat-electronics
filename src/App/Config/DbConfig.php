@@ -6,7 +6,6 @@ use mysqli;
 class DbConfig{
     static function getConnection()
     {
-        $credentials = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/env.ini");
-        return new mysqli($credentials['server'], $credentials['user'], $credentials['password'], $credentials['database']);
+        return new mysqli(getenv('DB_HOST'), $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
     }
 }
