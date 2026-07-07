@@ -52,7 +52,8 @@
             <th>Issue</th>
             <th>Status</th>
           </tr>
-
+        </thead>
+        <tbody>
           <tr>
             <td>#101</td>
             <td>Name</td>
@@ -74,10 +75,9 @@
             <td>No display</td>
             <td><span class="status completed">Completed</span></td>
           </tr>
-          </tbody>
+        </tbody>
       </table>
     </div>
-  </div>
   </div>
 </body>
 
