@@ -47,6 +47,8 @@ class SaleController
         $sale->totalAmount = $request->total_amount;
         $sale->update();
 
+        
+
         header('Location: /sale');
         exit;
     }
@@ -63,13 +65,13 @@ class SaleController
         return $sale->get($id);
     }
 
-    public function delete($id)
-    {
-        $sale = new Sale();
-        $sale->saleId = $id;
-        $sale->delete();
+    // public function delete($id)
+    // {
+    //     $sale = new Sale();
+    //     $sale->saleId = $id;
+    //     $sale->delete();
 
-        header('Location: /sale');
-        exit;
-    }
+    //     header('Location: /sale');
+    //     exit;
+    // }
 }

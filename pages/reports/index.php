@@ -390,7 +390,7 @@ function fmt($value): string
             </div>
         <?php endif; ?>
  
-    </div><!-- /.main -->
+    </div>
 </body>
 </html>
  

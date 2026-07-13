@@ -23,17 +23,50 @@ function navLink(string $href, string $label, string $current): string
     }
 
     .brand-name {
-        font-size: 24px; font-weight: 700; color: #fff;
-        letter-spacing: 3px; border-bottom: 2px solid #2563eb;
-        padding-bottom: 6px; display: inline-block;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 3px;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 6px;
+        display: inline-block;
     }
 
-    .brand-sub  { font-size: 10px; letter-spacing: 5px; color: #94a3b8; margin-top: 6px;  display: block; }
-    .brand-tag  { font-size: 9px;  letter-spacing: 2px; color: #475569; margin-top: 10px; display: block; }
+    .brand-sub {
+        font-size: 10px;
+        letter-spacing: 5px;
+        color: #94a3b8;
+        margin-top: 6px;
+        display: block;
+    }
 
-    .circuit-line { display: flex; align-items: center; gap: 4px; margin-top: 14px; }
-    .circuit-line span { height: 1px; flex: 1; background: #1e3a5f; }
-    .circuit-dot { width: 6px; height: 6px; border-radius: 50%; background: #2563eb; }
+    .brand-tag {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: #475569;
+        margin-top: 10px;
+        display: block;
+    }
+
+    .circuit-line {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 14px;
+    }
+
+    .circuit-line span {
+        height: 1px;
+        flex: 1;
+        background: #1e3a5f;
+    }
+
+    .circuit-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #2563eb;
+    }
 
     nav {
         display: flex;
@@ -73,7 +106,9 @@ function navLink(string $href, string $label, string $current): string
         transition: color 0.2s;
     }
 
-    .logout-link:hover { color: #f87171; }
+    .logout-link:hover {
+        color: #f87171;
+    }
 </style>
 
 <!-- 3. HTML THIRD — all structure here, uses the classes defined above -->
@@ -88,9 +123,12 @@ function navLink(string $href, string $label, string $current): string
         <span class="brand-sub">E L E C T R O N I C S</span>
         <span class="brand-tag">POWER · PRECISION · PERFORMANCE</span>
         <div class="circuit-line">
-            <span></span><div class="circuit-dot"></div>
-            <span></span><div class="circuit-dot"></div>
-            <span></span><div class="circuit-dot"></div>
+            <span></span>
+            <div class="circuit-dot"></div>
+            <span></span>
+            <div class="circuit-dot"></div>
+            <span></span>
+            <div class="circuit-dot"></div>
         </div>
     </div>
 
@@ -109,4 +147,4 @@ function navLink(string $href, string $label, string $current): string
         <a href="/auth/logout" class="logout-link">Logout</a>
     </nav>
 
-</aside>  <!-- ✅ properly closed -->
+</aside> <!-- ✅ properly closed -->
