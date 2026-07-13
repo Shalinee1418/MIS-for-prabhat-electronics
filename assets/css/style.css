@@ -10,40 +10,119 @@ body {
   background-color: #f4f6f9;
 }
 
-/* Sidebar */
-/* .logo {
-  width: 200px;
-  margin-right: 70px;
-} */
+/* Sidebar
+   FIX (root cause of the sidebar/container mismatch): this file used to
+   define .sidebar as width:150px, no flex, a lighter navy (#16325c),
+   plus rules for `.sidebar h2` / `.sidebar nav` / `.sidebar nav a` that
+   don't even match the sidebar's actual markup anymore (it uses
+   .brand-name/.nav-link/.logout-link now, not <h2>/<a> directly).
+   Meanwhile pages/include/aside.php had ITS OWN <style> block that
+   redefined .sidebar as width:260px, display:flex, a darker navy
+   (#0a1628) — and injected it via a <link>+<style> placed in <body>,
+   not <head>, on every single page. Two different files silently
+   fighting over the same component's CSS, loaded in a non-standard
+   order, is what caused the width/position to render inconsistently.
+   This block is now the ONLY definition of .sidebar in the project. */
 
 .sidebar {
-  width: 150px;
-  height: 100vh;
-  background: #16325c;
+  width: 260px;
+  background: #0a1628;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.75rem;
+  flex-shrink: 0;
+  min-height: 100vh;
   color: white;
-  padding: 20px;
 }
 
-.sidebar h2 {
-  margin-bottom: 30px;
-  text-align: center;
+.brand-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 6px;
+  display: inline-block;
+}
+
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: #94a3b8;
+  margin-top: 6px;
+  display: block;
+}
+
+.brand-tag {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #475569;
+  margin-top: 10px;
+  display: block;
+}
+
+.circuit-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.circuit-line span {
+  height: 1px;
+  flex: 1;
+  background: #1e3a5f;
+}
+
+.circuit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2563eb;
 }
 
 .sidebar nav {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px 0;
+  flex: 1;
 }
 
-.sidebar nav a {
+.nav-link {
+  color: #94a3b8;
   text-decoration: none;
-  color: white;
-  border-radius: 5px;
-  padding: 10px;
+  padding: 12px 16px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
-.sidebar nav a:hover {
-  background: #334155;
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.nav-link.active {
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.logout-link {
+  color: #475569;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: auto;
+  transition: color 0.2s;
+}
+
+.logout-link:hover {
+  color: #f87171;
 }
 
 /* Main Content */
@@ -143,7 +222,7 @@ table th {
 /* Form */
 .form-container {
   background: white;
-  width:auto;
+  width: auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -175,4 +254,897 @@ table th {
   border-radius: 5px;
   margin-top: 10px;
   width: 75px;
+}
+
+/* ============================================================
+   CENTRALIZED PAGE STYLES
+   Every page below used to carry its own <style> block in <head>,
+   duplicating the reset/body rules on every page and, worse,
+   redeclaring generic class names (.header, .field, .main,
+   .form-footer, table/th/td/select) with DIFFERENT values on
+   different pages. Since only one page rendered at a time before,
+   the collisions were invisible — but it meant zero consistency
+   and no reuse. Everything is centralized here now, with
+   page-specific rules scoped under a wrapper class (.entity-form,
+   .sales-form, .purchase-voucher, .login-page, .service-form-page)
+   so unrelated pages can't stomp on each other now that they all
+   share one stylesheet via pages/include/head.php.
+   ============================================================ */
+
+/* --- .form-page: generic modifier for full-height, column-flex
+   content wrappers (form-heavy pages). Combine with .main. --- */
+.form-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- .field-row: shared row layout (label + input side by side).
+   Used by the service request form and the customer address row. --- */
+.field-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.field-row label {
+  width: 180px;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.field-row input,
+.field-row select,
+.field-row textarea {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 9px 12px;
+  font-size: 14px;
+  color: #333;
+  background: white;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.field-row input:focus,
+.field-row select:focus,
+.field-row textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.field-row input[readonly] {
+  background: #f8f8f8;
+  color: #666;
+}
+
+/* --- .entity-form: shared "form card" component, used by
+   Customer and Supplier create pages (previously two nearly
+   identical, independently-styled templates: .customer-form and
+   .supplier-form with slightly different header colors). --- */
+.entity-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.entity-form .form-header {
+  background: #0a1628;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entity-form .form-header h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+.entity-form .form-header span {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.entity-form .form-body {
+  flex: 1;
+  padding: 30px;
+}
+
+.entity-form .field {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.entity-form .field label {
+  width: 180px;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  padding-top: 7px;
+}
+
+.entity-form .field label span {
+  color: red;
+}
+
+.entity-form .field input,
+.entity-form .field textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.entity-form .field textarea {
+  height: 90px;
+  resize: vertical;
+  font-family: Arial, sans-serif;
+}
+
+/* Customer's city/pincode sub-row, nested inside a shared .field-row */
+.entity-form .sub-label,
+.entity-form .pincode-label {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.entity-form .sub-label {
+  width: 180px;
+}
+.entity-form .pincode-label {
+  width: 120px;
+  padding-left: 20px;
+}
+
+.entity-form .sub-input,
+.entity-form .pincode-input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.entity-form .form-footer {
+  background: #eaeaea;
+  padding: 12px 20px;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.entity-form .form-footer button {
+  padding: 9px 28px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* --- Sales voucher form (pages/sales/create.php), scoped under
+   .sales-form so its .header doesn't collide with the standard
+   dashboard .header used on every list page. --- */
+.sales-form {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+.sales-form .header {
+  background: #2563eb;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-form .voucher-info {
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sales-form .voucher-info .field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sales-form .voucher-info label {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.sales-form .voucher-info input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.sales-form table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sales-form thead {
+  background: #f2f2f2;
+}
+
+.sales-form th,
+.sales-form td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.sales-form td select,
+.sales-form td input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 4px;
+}
+
+.sales-form .footer {
+  background: #eaeaea;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
+
+.sales-form .footer button {
+  padding: 8px 20px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+}
+
+.sales-form .footer button.save-btn {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  font-weight: bold;
+}
+
+.sales-form .error {
+  color: #b91c1c;
+  padding: 10px 15px;
+}
+
+/* --- Purchase voucher form (pages/purchase/create.php), scoped
+   under .purchase-voucher so its table/input overrides don't leak
+   into purchase/edit.php, sales/edit.php, or stock_item/edit.php —
+   all of which also use the generic .form-container. --- */
+.purchase-voucher .header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.purchase-voucher .top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.purchase-voucher table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.purchase-voucher th,
+.purchase-voucher td {
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.purchase-voucher input[type="number"],
+.purchase-voucher input[type="text"],
+.purchase-voucher select {
+  width: 90%;
+  padding: 4px;
+}
+
+.purchase-voucher .totals-box {
+  margin-top: 15px;
+  text-align: right;
+  line-height: 2;
+}
+
+.purchase-voucher .btn-row {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.purchase-voucher .error {
+  color: #b91c1c;
+}
+
+/* --- Login page (pages/auth/login.php). Note: this page renders its
+   own sidebar markup (not the shared aside.php include, since there's
+   no logged-in nav before authentication) but reuses the same
+   .sidebar/.brand-*/
+.circuit-* classes above,
+so
+  it
+  automatically
+  matches
+  the
+  rest
+  of
+  the
+  app
+  with
+  zero
+  extra
+  CSS.
+  Everything
+  below
+  is
+  specific
+  to
+  the
+  login
+  card
+  itself.
+  ---
+  */
+  .login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+.sidebar-footer p {
+  font-size: 12px;
+  color: #334155;
+  line-height: 1.7;
+}
+.sidebar-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f2040;
+  border: 0.5px solid #1e3a5f;
+  border-radius: 8px;
+  padding: 7px 12px;
+  margin-top: 14px;
+}
+.sidebar-tag span {
+  font-size: 12px;
+  color: #60a5fa;
+}
+.dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.login-container {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 2.5rem 2.25rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+.login-page .card-header {
+  margin-bottom: 2rem;
+}
+.login-page .card-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 5px;
+}
+.login-page .card-header p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.login-page .error-msg {
+  display: none;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #dc2626;
+  margin-bottom: 1.25rem;
+  align-items: center;
+  gap: 8px;
+}
+.login-page .error-msg.show {
+  display: flex;
+}
+
+.login-page .field {
+  margin-bottom: 1.25rem;
+}
+.login-page .field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 7px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.login-page .input-wrap {
+  position: relative;
+}
+.login-page .input-wrap .icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 17px;
+  color: #94a3b8;
+  pointer-events: none;
+}
+.login-page .input-wrap input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 0 13px 0 40px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #f8fafc;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    box-shadow 0.15s;
+}
+.login-page .input-wrap input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.login-page .input-wrap input.error-field {
+  border-color: #f87171;
+}
+.login-page .input-wrap input::placeholder {
+  color: #cbd5e1;
+}
+.login-page .eye-btn {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+  font-size: 17px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-page .eye-btn:hover {
+  color: #475569;
+}
+
+.login-page .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.login-page .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+  cursor: pointer;
+  user-select: none;
+}
+.login-page .checkbox-label input[type="checkbox"] {
+  accent-color: #2563eb;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.login-page .forgot {
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+}
+.login-page .forgot:hover {
+  text-decoration: underline;
+}
+
+.login-page .login-btn {
+  width: 100%;
+  height: 48px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+  letter-spacing: 0.3px;
+}
+.login-page .login-btn:hover {
+  background: #1d4ed8;
+}
+.login-page .login-btn:active {
+  transform: scale(0.98);
+}
+.login-page .login-btn.loading {
+  background: #93c5fd;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.login-page .divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.5rem 0;
+}
+.login-page .divider span {
+  font-size: 12px;
+  color: #94a3b8;
+}
+.login-page .divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.login-page .footer-text {
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+}
+.login-page .footer-text a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+.login-page .footer-text a:hover {
+  text-decoration: underline;
+}
+.login-page .card-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.login-page .card-footer .sep {
+  font-size: 12px;
+  color: #cbd5e1;
+}
+.login-page .card-footer .copy {
+  font-size: 12px;
+  color: #94a3b8;
+}
+.login-page .secure-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.login-page .secure-badge i {
+  font-size: 14px;
+  color: #22c55e;
+}
+.login-page .secure-badge span {
+  font-size: 12px;
+  color: #22c55e;
+}
+
+@media (max-width: 640px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    min-height: unset;
+    padding: 1.25rem 1.5rem;
+    flex-direction: row;
+    align-items: center;
+  }
+  .sidebar-footer {
+    display: none;
+  }
+  .brand {
+    margin-bottom: 0;
+  }
+  .login-page {
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+}
+
+/* --- Service request form (pages/service/create.php), scoped under
+   .service-form-page (combine with .main.form-page for the layout). --- */
+.service-form-page .page-header {
+  background: #2563eb;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.service-form-page .form-wrapper {
+  flex: 1;
+  padding: 30px;
+}
+
+.service-form-page .form-card {
+  background: white;
+  border-radius: 4px;
+  padding: 30px 40px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.service-form-page .cost-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.service-form-page .cost-wrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.service-form-page .cost-prefix {
+  padding: 9px 12px;
+  background: #f4f6f9;
+  border-right: 1px solid #ccc;
+  color: #555;
+  font-size: 14px;
+}
+
+.service-form-page .cost-wrapper input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  padding: 9px 12px;
+}
+
+.service-form-page .cost-wrapper input:focus {
+  box-shadow: none;
+}
+
+.service-form-page .form-footer {
+  background: #e9ecef;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.service-form-page .btn-submit {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 32px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.service-form-page .btn-submit:hover {
+  background: #1d4ed8;
+}
+
+/* --- Reports page (pages/reports/index.php). Class names here were
+   already unique, so no scoping needed — moved as-is, with the
+   ad-hoc blue (#3085c3) unified to the app's one accent color. --- */
+.report-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.report-tab {
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  background: white;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+.report-tab.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.date-filter {
+  background: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.date-filter label {
+  font-size: 13px;
+  color: #555;
+}
+
+.date-filter input {
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.date-filter button {
+  padding: 7px 16px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.export-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.export-btn:hover {
+  background: #15803d;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.s-card {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.s-card h4 {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.s-card p {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.badge-paid {
+  background: #dcfce7;
+  color: #166534;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.badge-due {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.badge-part {
+  background: #fef9c3;
+  color: #854d0e;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.badge-warranty {
+  background: #e0f2fe;
+  color: #075985;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+.badge-no {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  font-size: 15px;
 }
