@@ -11,6 +11,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ServiceController;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
@@ -36,7 +37,7 @@ use Sarma\MisForPrabhatElectronics\App\Controllers\ServiceController;
                 </p>
             </div>
             <div class="card">
-               <h3><a href="/service/create" class="button">New Service</a></h3>
+                <h3><a href="/service/create" class="button">New Service</a></h3>
                 <p></p>
             </div>
             <div class="card">

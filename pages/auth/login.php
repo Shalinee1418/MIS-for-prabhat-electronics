@@ -7,6 +7,7 @@ $error = isset($_GET['error']) ? urldecode($_GET['error']) : null;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login – Prabhat Electronics</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.34.0/dist/tabler-icons.min.css" />
   <style>
     *, *::before, *::after {

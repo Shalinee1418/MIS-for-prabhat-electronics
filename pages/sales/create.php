@@ -13,6 +13,7 @@ $current_date = date('Y-m-d');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Entry</title>
+    <link rel="stylesheet" href="
 </head>
 
 <body>
@@ -21,7 +22,7 @@ $current_date = date('Y-m-d');
     </aside>
 
     <div class="main">
-        <style>
+        <!-- <style>
             * {
                 margin: 0;
                 padding: 0;
@@ -182,7 +183,7 @@ $current_date = date('Y-m-d');
                 border-color: #3085c3;
                 font-weight: bold;
             }
-        </style>
+        </style> -->
 
         <form action="/sale/store" method="post">
             <div class="sales-form">

@@ -25,7 +25,8 @@ body {
    This block is now the ONLY definition of .sidebar in the project. */
 
 .sidebar {
-  width: 260px;
+  /* position: fixed; */
+  width: 250px;
   background: #0a1628;
   display: flex;
   flex-direction: column;
@@ -128,7 +129,7 @@ body {
 /* Main Content */
 .main {
   flex: 1;
-  padding: 20px;
+  padding: 0;
 }
 
 /* Header */
@@ -137,9 +138,11 @@ body {
   padding: 15px 20px;
   border-radius: 8px;
   margin-bottom: 20px;
+  margin-left: 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .header h1 {

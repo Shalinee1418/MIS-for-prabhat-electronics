@@ -112,7 +112,12 @@ function navLink(string $href, string $label, string $current): string
 </style>
 
 <!-- 3. HTML THIRD — all structure here, uses the classes defined above -->
-<aside class="sidebar">
+<!-- <body>
+<aside class="sidebar"></aside>
+<main class="main">
+    <header class="header"></header>
+</main> -->
+        
 
     <!-- Brand block -->
     <div class="brand">
@@ -147,4 +152,4 @@ function navLink(string $href, string $label, string $current): string
         <a href="/auth/logout" class="logout-link">Logout</a>
     </nav>
 
-</aside> <!-- ✅ properly closed -->
+</aside> 

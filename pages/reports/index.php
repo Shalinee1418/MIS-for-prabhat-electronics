@@ -31,7 +31,7 @@ function fmt($value): string
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports — Prabhat Electronics</title>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <style>
+    <!-- <style>
         .report-tabs {
             display: flex;
             gap: 8px;
@@ -176,7 +176,7 @@ function fmt($value): string
             color: #94a3b8;
             font-size: 15px;
         }
-    </style>
+    </style> -->
 </head>
  
 <body>
