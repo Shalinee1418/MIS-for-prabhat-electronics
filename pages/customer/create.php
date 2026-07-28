@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Entry</title>
-    <style>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- <style>
         * {
             margin: 0;
             padding: 0;
@@ -148,7 +149,7 @@
             font-weight: 500;
             cursor: pointer;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>

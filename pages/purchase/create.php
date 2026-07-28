@@ -15,8 +15,9 @@ $products = $stockItem->getAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Purchase</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-    <style>
+    <!-- <style>
         .header-row {
             display: flex;
             justify-content: space-between;
@@ -62,7 +63,7 @@ $products = $stockItem->getAll();
             display: flex;
             gap: 10px;
         }
-    </style>
+    </style> -->
 </head>
 
 <body>

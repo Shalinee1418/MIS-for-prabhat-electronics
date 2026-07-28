@@ -11,8 +11,9 @@ if (empty($_SESSION['email'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>New Service Request — Prabhat Electronics</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-  <style>
+  <!-- <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
  
     body { display: flex; background-color: #f4f6f9; min-height: 100vh; }
@@ -187,7 +188,7 @@ if (empty($_SESSION['email'])) {
     }
  
     .btn-submit:hover { background: #2e73a8; }
-  </style>
+  </style> -->
 </head>
 <body>
  
