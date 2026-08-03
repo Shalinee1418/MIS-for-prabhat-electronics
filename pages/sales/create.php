@@ -13,7 +13,8 @@ $current_date = date('Y-m-d');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Entry</title>
-    <link rel="stylesheet" href="
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">    
 </head>
 
 <body>
@@ -22,7 +23,7 @@ $current_date = date('Y-m-d');
     </aside>
 
     <div class="main">
-        <!-- <style>
+        <style>
             * {
                 margin: 0;
                 padding: 0;
@@ -183,7 +184,7 @@ $current_date = date('Y-m-d');
                 border-color: #3085c3;
                 font-weight: bold;
             }
-        </style> -->
+        </style>
 
         <form action="/sale/store" method="post">
             <div class="sales-form">
@@ -226,7 +227,8 @@ $current_date = date('Y-m-d');
                         </thead>
                         <tbody id="itemTable">
                             <tr>
-                                <td><input type="text" name="items[0][name]"></td>
+                                <td><input type="text" name="items[0][name]">
+                            <select </td>
                                 <td><input type="number" class="qty" name="items[0][qty]" min="0"></td>
                                 <td><input type="text" name="items[0][unit]"></td>
                                 <td><input type="number" class="rate" name="items[0][rate]" min="0"></td>

@@ -31,19 +31,19 @@ class Sale
         $this->totalAmount = $data['total_amount'];
     }
 
-    public function save()
-    {
-        $sql = "INSERT INTO sale(sale_date, invoice_number, discount, tax_amount, unit_price, total_amount) VALUES(?,?,?,?,?,?)";
-        $stmt = $this->connection->prepare($sql);
-        $invoiceNumber = (int) $this->invoiceNumber;
-        $discount = (float) $this->discount;
-        $taxAmount = (float) $this->taxAmount;
-        $unitPrice = (float) $this->unitPrice;
-        $totalAmount = (float) $this->totalAmount;
-        $stmt->bind_param("sidddd", $this->saleDate, $invoiceNumber, $discount, $taxAmount, $unitPrice, $totalAmount);
-        $stmt->execute();
-        return $this->connection->insert_id;
-    }
+  public function save()
+{
+    $sql = "INSERT INTO sale(sale_date, invoice_number, discount, tax_amount, unit_price, total_amount) VALUES(?,?,?,?,?,?)";
+    $stmt = $this->connection->prepare($sql);
+    $invoiceNumber = (int) $this->invoiceNumber;
+    $discount = (float) $this->discount;
+    $taxAmount = (float) $this->taxAmount;
+    $unitPrice = (float) $this->unitPrice;
+    $totalAmount = (float) $this->totalAmount;
+    $stmt->bind_param("sidddd", $this->saleDate, $invoiceNumber, $discount, $taxAmount, $unitPrice, $totalAmount);
+    $stmt->execute();
+    return $this->connection->insert_id;
+}
 
     public function getAll()
     {

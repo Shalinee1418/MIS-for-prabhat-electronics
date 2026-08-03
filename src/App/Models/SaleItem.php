@@ -33,7 +33,7 @@ class SaleItem
 
     public function save()
     {
-        $sql = "INSERT INTO sales_items(sale_id, product_id, quantity, price, subtotal) VALUES($this->saleId, '$this->productId', $this->quantity, $this->price, $this->subTotal)";
+        $sql = "INSERT INTO sale_items(sale_id, product_id, quantity, unit_price) VALUES($this->saleId, '$this->productId', $this->quantity, $this->price)";
         echo $sql;
         $this->connection->query($sql);
     }
