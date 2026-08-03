@@ -59,23 +59,24 @@ $sales = $saleController->getAll();
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name of Item</th>
-            <th>Category</th>
-            <th>Customer</th>
-            <th>Payment</th>
-            <th>Sale Date</th>
-            <th></th>
+            <th>Date</th>
+            <th>Discount</th>
+            <th>Invoice </th>
+            <th>Tax Amount</th>
+            <th>Unit Price</th>
+            <th>Total Amount </th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($sales as $sale): ?>
             <tr>
               <td><?= $sale['sale_id'] ?? '' ?></td>
-              <td><?= $sale['customer'] ?? '' ?></td>
-              <td><?= $sale['category'] ?? '' ?></td>
-              <td><?= $sale['device'] ?? '' ?></td>
-              <td><?= $sale['payment'] ?? '' ?></td>
               <td><?= $sale['sale_date'] ?? '' ?></td>
+              <td><?= $sale['discount'] ?? '' ?></td>
+              <td><?= $sale['invoice_number'] ?? '' ?></td>
+              <td><?= $sale['tax_amount'] ?? '' ?></td>
+              <td><?= $sale['unit_price'] ?? '' ?></td>
+              <td><?= $sale['total_amount'] ?? '' ?></td>
               <td><a href="/sale/view?id=<?= $sale['id'] ?? '' ?>">View</a></td>
             </tr>
           <?php endforeach; ?>
