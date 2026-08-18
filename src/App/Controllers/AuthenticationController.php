@@ -21,7 +21,5 @@ class AuthenticationController
             header("location:/user/admin-dashboard");
         } else
             echo "Authentication failed!";
-
-        $connection->close();
     }
 }

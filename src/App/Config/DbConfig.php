@@ -15,5 +15,5 @@ class DbConfig
             self::$connection = new mysqli(getenv('DB_HOST'), $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
         }
         return self::$connection;
-    }
+    }// singleton implementation to ensure only one connection is created and reused throughout the application
 }
