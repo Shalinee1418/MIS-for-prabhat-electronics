@@ -209,43 +209,6 @@ CREATE TABLE invoice_items (
 
 
 
--- CREATE TABLE users (
---     user_id INT AUTO_INCREMENT PRIMARY KEY,
---     username VARCHAR(50) UNIQUE NOT NULL,
---     password_hash VARCHAR(255) NOT NULL,
---     role VARCHAR(30)
--- );
-
--- CREATE TABLE suppliers (
---    supplier_id INT AUTO_INCREMENT PRIMARY KEY,
---    supplier_name VARCHAR(100) NOT NULL,
---    phone VARCHAR(15) UNIQUE,
---    email VARCHAR(120),
---    address TEXT
--- );
-
--- CREATE TABLE categories (
---    category_id INT AUTO_INCREMENT PRIMARY KEY,
---    category_name VARCHAR(100) NOT NULL,
---    hsn_code VARCHAR(30),
---    description TEXT
--- );
-
--- DECIMAL(
-
--- CREATE TABLE sales (
---    sale_id INT AUTO_INCREMENT PRIMARY KEY,
---    customer_id INT,
---    sale_date DATE,
---    invoice_number VARCHAR(50) UNIQUE,
---    discount DECIMAL(12,2),
---    tax_amount DECIMAL(12,2),
---    total_amount DECIMAL(12,2),
-
---    FOREIGN KEY(customer_id)
---    REFERENCES customers(customer_id)
--- );
-
 CREATE TABLE sale_items (
    sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
    sale_id INT NOT NULL,
@@ -262,36 +225,3 @@ CREATE TABLE sale_items (
    REFERENCES product(product_id)
       
 );
--- CREATE TABLE payments (
---    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-
---    sale_id INT NULL,
---    purchase_id INT NULL,
---    service_request_id INT NULL,
-
---    payment_date DATE,
---    amount DECIMAL(12,2),
---    payment_mode VARCHAR(30),
---    status VARCHAR(20),
-
---    FOREIGN KEY(sale_id)
---    REFERENCES sales(sale_id),
-
---    FOREIGN KEY(purchase_id)
---    REFERENCES purchase(purchase_id),
-
---    FOREIGN KEY(service_request_id)
---    REFERENCES service_requests(service_request_id)
--- );
-
--- CREATE TABLE ledger_accounts (
---    ledger_id INT AUTO_INCREMENT PRIMARY KEY,
---    account_name VARCHAR(100),
---    account_type VARCHAR(30),
---    opening_balance DECIMAL(12,2)
--- );
--- CREATE TABLE journal_entries (
---    journal_id INT AUTO_INCREMENT PRIMARY KEY,
---    transaction_date DATE,
---    narration TEXT
--- );
