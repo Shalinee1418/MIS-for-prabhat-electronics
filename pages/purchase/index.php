@@ -1,11 +1,9 @@
 <?php
 
-use Sarma\MisForPrabhatElectronics\App\Controllers\StockItemController;
+use Sarma\MisForPrabhatElectronics\App\Controllers\PurchaseController;
 
-$stockItemController = new StockItemController();
-$stock_items = $stockItemController->getAll();
-
-
+$purchaseController = new PurchaseController();
+$purchase = $purchaseController->getAll();
 
 ?>
 <!DOCTYPE html>
@@ -15,6 +13,7 @@ $stock_items = $stockItemController->getAll();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>purchase</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
@@ -37,7 +36,7 @@ $stock_items = $stockItemController->getAll();
         </p>
       </div>
       <div class="card">
-        <h3>Pending Stock</h3>
+        <h3>Pending Purchase</h3>
         <p></p>
       </div>
       <div class="card">
@@ -48,28 +47,27 @@ $stock_items = $stockItemController->getAll();
 
     <div class="table-container">
       <h3>Purchases</h3>
-      <br>
       <table>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Category</th>
-            <th>Device</th>
-            <th>Brand</th>
-            <th>Status</th>
+            <th>Supplier</th>
+            <th>Purchase Date</th>
+            <th>Total Amount</th>
+            <th>Payment Status</th>
           </tr>
         </thead>
         <tbody>
           <?php
-          foreach ($stock_items as $stock_item) {
+          foreach ($purchase as $purchase) {
+
           ?>
             <tr>
-
-              <td><?= $stock_item['product_id'] ?></td>
-              <td><?= $stock_item['category_id'] ?></td>
-              <td><?= $stock_item['name'] ?></td>
-              <td><?= $stock_item['brand'] ?></td>
-
+              <td><?= $purchase['purchase_id'] ?></td>
+              <td><?= $purchase['supplier_id'] ?></td>
+              <td><?= $purchase['purchase_date'] ?></td>
+              <td><?= $purchase['total_amount'] ?></td>
+              <td><?= $purchase['payment_status'] ?></td>
             </tr>
           <?php } ?>
     </div>

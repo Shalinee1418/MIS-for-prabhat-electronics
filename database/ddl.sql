@@ -7,6 +7,7 @@ password VARCHAR(100)
 CREATE TABLE supplier
 (
 supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+supplier_name VARCHAR(100) NOT NULL,
 phone CHAR(10) UNIQUE NOT NULL,
 email VARCHAR(255),
 address CHAR(255)
@@ -24,12 +25,19 @@ CREATE TABLE purchase
     unit_price DECIMAL NOT NULL
 );
 
-CREATE TABLE purchase_items
-(
+CREATE TABLE purchase_items (
     purchase_item_id INT AUTO_INCREMENT PRIMARY KEY,
-    purchase_id INT AUTO_INCREMENT UNIQUE NOT NULL,
-    stock_item_id INT AUTO_INCREMENT UNIQUE NOT NULL,
-    quantity INT AUTO_INCREMENT NOT NULL,
+
+    purchase_id INT NOT NULL,
+    product_id INT NOT NULL,
+
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY (purchase_id)
+        REFERENCES purchase(purchase_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE category
@@ -87,15 +95,16 @@ credit_amount DECIMAL NOT NULL,
 narration VARCHAR(255),
 );
 
-CREATE TABLE customer
-(
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(255) NOT NULL,
-    phone CHAR(10) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    gst_number VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    pincode CHAR(10) NOT NULL,
+
+ CREATE TABLE customers (
+   customer_id INT AUTO_INCREMENT PRIMARY KEY,
+   customer_name VARCHAR(100),
+   phone VARCHAR(15),
+   email VARCHAR(120),
+   gst_number VARCHAR(30),
+   city VARCHAR(50),
+   pincode VARCHAR(10),
+   address TEXT
 );
 
 CREATE TABLE account_ledger
@@ -107,13 +116,32 @@ opening_balance DECIMAL NOT NULL,
 closing_balance DECIMAL NOT NULL,
 );
 
-CREATE TABLE service_request
-(
-service_request_id INT AUTO_INCREMENT PRIMARY KEY,
-stock_item_id INT NOT NULL,
-customer_id INT NOT NULL,
-delivery_date DATE NOT NULL,
-warranty_status ENUM NOT NULL,
+CREATE TABLE service_requests (
+   service_request_id INT AUTO_INCREMENT PRIMARY KEY,
+
+   customer_id INT NOT NULL,
+   product_id INT NOT NULL,
+
+   request_date DATE NOT NULL,
+   delivery_date DATE,
+
+   problem_description TEXT,
+
+
+   service_status ENUM(
+      'Pending',
+      'In Progress',
+      'Completed',
+      'Delivered'
+   ) DEFAULT 'Pending',
+
+   service_charge DECIMAL(10,2),
+
+   FOREIGN KEY (customer_id)
+   REFERENCES customers(customer_id),
+
+   FOREIGN KEY (product_id)
+   REFERENCES product(product_id)
 );
 
 CREATE TABLE service_part_used
@@ -126,6 +154,25 @@ quantity INT NOT NULL,
 charge_to_customer DECIMAL NOT NULL,
 
 );
+
+CREATE TABLE service_parts_used
+(
+    service_part_used_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    service_request_id INT NOT NULL,
+    product_id INT NOT NULL,
+
+    quantity INT NOT NULL,
+
+    unit_price DECIMAL(10,2) NOT NULL,
+
+    FOREIGN KEY(service_request_id)
+    REFERENCES service_requests(service_request_id),
+
+    FOREIGN KEY(product_id)
+    REFERENCES product(product_id)
+);
+
 CREATE TABLE payment_status
 (
 payment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -139,23 +186,6 @@ payment_mode ENUM NOT NULL,
 payment_status ENUM NOT NULL
 );
 
-
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE table_name;
-SET FOREIGN_KEY_CHECKS = 1;
-
-
-SELECT CONCAT('TRUNCATE TABLE `', table_schema, '`.`', table_name, '`;') 
-FROM information_schema.TABLES 
-WHERE table_schema = 'db_name';
-
-
-CREATE TABLE products (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    price DECIMAL(10,2),
-    gst_rate DECIMAL(5,2) 
-);
 
 CREATE TABLE invoices (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -179,196 +209,19 @@ CREATE TABLE invoice_items (
 
 
 
--- CREATE TABLE users (
---     user_id INT AUTO_INCREMENT PRIMARY KEY,
---     username VARCHAR(50) UNIQUE NOT NULL,
---     password_hash VARCHAR(255) NOT NULL,
---     role VARCHAR(30)
--- );
+CREATE TABLE sale_items (
+   sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
+   sale_id INT NOT NULL,
+   product_id INT NOT NULL,
+   quantity INT,
+   unit_price DECIMAL(12,2),
+   discount DECIMAL(12,2),
+   tax_amount DECIMAL(12,2),
 
--- CREATE TABLE suppliers (
---    supplier_id INT AUTO_INCREMENT PRIMARY KEY,
---    supplier_name VARCHAR(100) NOT NULL,
---    phone VARCHAR(15) UNIQUE,
---    email VARCHAR(120),
---    address TEXT
--- );
+   FOREIGN KEY(sale_id)
+   REFERENCES sale(sale_id),
 
--- CREATE TABLE categories (
---    category_id INT AUTO_INCREMENT PRIMARY KEY,
---    category_name VARCHAR(100) NOT NULL,
---    hsn_code VARCHAR(30),
---    description TEXT
--- );
-
--- CREATE TABLE products (
---    product_id INT AUTO_INCREMENT PRIMARY KEY,
---    category_id INT NOT NULL,
---    product_name VARCHAR(150) NOT NULL,
---    product_code VARCHAR(50) UNIQUE,
---    brand VARCHAR(100),
---    purchase_price DECIMAL(12,2),
---    sale_price DECIMAL(12,2),
-
---    FOREIGN KEY (category_id)
---    REFERENCES categories(category_id)
--- );
--- CREATE TABLE stock (
---    stock_id INT AUTO_INCREMENT PRIMARY KEY,
---    product_id INT NOT NULL,
---    serial_number VARCHAR(100),
---    quantity INT DEFAULT 0,
---    reorder_level INT,
-
---    FOREIGN KEY(product_id)
---    REFERENCES products(product_id)
--- );
-
--- CREATE TABLE purchases (
---    purchase_id INT AUTO_INCREMENT PRIMARY KEY,
---    supplier_id INT NOT NULL,
---    purchase_date DATE,
---    tax_amount DECIMAL(12,2),
---    total_amount DECIMAL(12,2),
---    payment_status VARCHAR(20),
-
---    FOREIGN KEY (supplier_id)
---    REFERENCES suppliers(supplier_id)
--- );
-
-
--- CREATE TABLE purchase_items (
---    purchase_item_id INT AUTO_INCREMENT PRIMARY KEY,
---    purchase_id INT NOT NULL,
---    product_id INT NOT NULL,
---    quantity INT NOT NULL,
---    unit_price DECIMAL(12,2),
---    tax_amount DECIMAL(12,2),
-
---    FOREIGN KEY (purchase_id)
---    REFERENCES purchases(purchase_id),
-
---    FOREIGN KEY (product_id)
---    REFERENCES products(product_id)
--- );
-
--- CREATE TABLE customers (
---    customer_id INT AUTO_INCREMENT PRIMARY KEY,
---    customer_name VARCHAR(100),
---    phone VARCHAR(15),
---    email VARCHAR(120),
---    gst_number VARCHAR(30),
---    city VARCHAR(50),
---    pincode VARCHAR(10)
--- );
-
--- CREATE TABLE sales (
---    sale_id INT AUTO_INCREMENT PRIMARY KEY,
---    customer_id INT,
---    sale_date DATE,
---    invoice_number VARCHAR(50) UNIQUE,
---    discount DECIMAL(12,2),
---    tax_amount DECIMAL(12,2),
---    total_amount DECIMAL(12,2),
-
---    FOREIGN KEY(customer_id)
---    REFERENCES customers(customer_id)
--- );
-
--- CREATE TABLE sale_items (
---    sale_item_id INT AUTO_INCREMENT PRIMARY KEY,
---    sale_id INT NOT NULL,
---    product_id INT NOT NULL,
---    quantity INT,
---    unit_price DECIMAL(12,2),
---    discount DECIMAL(12,2),
---    tax_amount DECIMAL(12,2),
-
---    FOREIGN KEY(sale_id)
---    REFERENCES sales(sale_id),
-
---    FOREIGN KEY(product_id)
---    REFERENCES products(product_id)
--- );
-
--- CREATE TABLE service_requests (
---    service_request_id INT AUTO_INCREMENT PRIMARY KEY,
---    customer_id INT,
---    product_id INT,
---    complaint TEXT,
---    delivery_date DATE,
---    warranty_status VARCHAR(30),
-
---    FOREIGN KEY(customer_id)
---    REFERENCES customers(customer_id),
-
---    FOREIGN KEY(product_id)
---    REFERENCES products(product_id)
--- );
-
--- CREATE TABLE service_parts_used (
---    part_used_id INT AUTO_INCREMENT PRIMARY KEY,
---    service_request_id INT,
---    product_id INT,
---    quantity INT,
---    unit_price DECIMAL(12,2),
---    charge_to_customer DECIMAL(12,2),
-
---    FOREIGN KEY(service_request_id)
---    REFERENCES service_requests(service_request_id),
-
---    FOREIGN KEY(product_id)
---    REFERENCES products(product_id)
--- );
-
-
--- CREATE TABLE payments (
---    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-
---    sale_id INT NULL,
---    purchase_id INT NULL,
---    service_request_id INT NULL,
-
---    payment_date DATE,
---    amount DECIMAL(12,2),
---    payment_mode VARCHAR(30),
---    status VARCHAR(20),
-
---    FOREIGN KEY(sale_id)
---    REFERENCES sales(sale_id),
-
---    FOREIGN KEY(purchase_id)
---    REFERENCES purchases(purchase_id),
-
---    FOREIGN KEY(service_request_id)
---    REFERENCES service_requests(service_request_id)
--- );
-
--- CREATE TABLE ledger_accounts (
---    ledger_id INT AUTO_INCREMENT PRIMARY KEY,
---    account_name VARCHAR(100),
---    account_type VARCHAR(30),
---    opening_balance DECIMAL(12,2)
--- );
--- CREATE TABLE journal_entries (
---    journal_id INT AUTO_INCREMENT PRIMARY KEY,
---    transaction_date DATE,
---    narration TEXT
--- );
-
--- CREATE TABLE journal_lines (
---    line_id INT AUTO_INCREMENT PRIMARY KEY,
---    journal_id INT,
---    ledger_id INT,
---    debit DECIMAL(12,2) DEFAULT 0,
---    credit DECIMAL(12,2) DEFAULT 0,
-
---    FOREIGN KEY(journal_id)
---    REFERENCES journal_entries(journal_id),
-
---    FOREIGN KEY(ledger_id)
---    REFERENCES ledger_accounts(ledger_id)
--- );
-
-
-
+   FOREIGN KEY(product_id)
+   REFERENCES product(product_id)
+      
+);
