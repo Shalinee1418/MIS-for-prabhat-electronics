@@ -56,7 +56,6 @@ class Supplier
             $connection = DbConfig::getConnection();
             $sql = "SELECT * FROM supplier";
             $result = $connection->query($sql);
-            $connection->close();
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
